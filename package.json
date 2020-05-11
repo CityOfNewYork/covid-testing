@@ -1,6 +1,6 @@
 {
   "name": "covid-testing",
-  "version": "2.1.2",
+  "version": "1.0.0",
   "description": "COVID Testing Facilities - Find the closest location.",
   "main": "index.js",
   "scripts": {
