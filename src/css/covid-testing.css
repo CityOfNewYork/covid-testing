@@ -28,13 +28,18 @@ div.route .adp-placemark * {
 .ol-overlaycontainer-stopevent .srch input {
   border: 1px solid #803D8D;
 }
-.btn-rnd {
+.btn-rnd,
+.clps>button:before {
   background-color: rgba(128,61,141,.55);
 }
 #mode td .btn-sq.active, .btn-sq:hover {
   background-color: rgba(128,61,141,.7);
   border: 1px solid #803D8D;
   box-shadow: 1px 1px 3px #803D8D;
+}
+.fnd #tabs .btns .btn-2.filtered:before,
+.clps>button:hover:before {
+  background-color: #803D8D;
 }
 @media only screen and (max-width: 750px), screen and (max-device-height: 350px) {
   .fnd .lst-srch .srch {

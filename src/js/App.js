@@ -18,13 +18,6 @@ const screenReaderNote = `<h1 style="color:red">Important</h1>
   </a>
 </p>`
 
-const getSplashOptions = () => {
-  const search = document.location.search
-  if (search.indexOf('splash=false') === -1) {
-    return {message: 'COVID Testing Facilities - Find the closest location.'}
-  }
-}
-
 const filters = [{
   title: 'Location type',
   choices: [
@@ -49,7 +42,7 @@ class App extends FinderApp {
     super({
       title: 'COVID Testing Facilities',
       facilityTabTitle: 'Testing Facilities',
-      splashOptions: getSplashOptions(),
+      splashOptions: App.getSplashOptions(document.location.search),
       geoclientUrl: urls.GEOCLIENT_URL,
       facilityUrl: urls.FACILITY_CSV_URL,
       facilityStyle: style,
@@ -77,4 +70,11 @@ class App extends FinderApp {
   }
 }
 
+App.getSplashOptions = () => {
+  const search = document.location.search
+  if (search.indexOf('splash=false') === -1) {
+    return {message: 'COVID Testing Facilities - Find the closest location.'}
+  }
+}
 export default App
+
