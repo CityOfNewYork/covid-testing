@@ -1,3 +1,5 @@
+import $ from 'jquery'
+import nyc from 'nyc-lib/nyc'
 import urls from './urls'
 import style from './style'
 import decorations from './decorations'
@@ -70,11 +72,11 @@ class App extends FinderApp {
   }
 }
 
-App.getSplashOptions = () => {
-  const search = document.location.search
+App.getSplashOptions = search => {
   if (search.indexOf('splash=false') === -1) {
     return {message: 'COVID Testing Facilities - Find the closest location.'}
   }
 }
+
 export default App
 

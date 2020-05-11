@@ -1,5 +1,8 @@
+import $ from 'jquery'
 import App from '../src/js/App'
 import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
+import CsvAddr from 'nyc-lib/nyc/ol/format/CsvAddr'
+import Geoclient from 'nyc-lib/nyc/Geoclient'
 import urls from '../src/js/urls'
 import style from '../src/js/style'
 import CsvPoint from 'nyc-lib/nyc/ol/format/CsvPoint'
@@ -8,6 +11,73 @@ import Feature from 'ol/Feature'
 import Point from 'ol/geom/Point'
 
 jest.mock('nyc-lib/nyc/ol/FinderApp')
+
+const optionsWsplash = {
+  title: 'COVID Testing Facilities',
+  facilityTabTitle: 'Testing Facilities',
+  splashOptions: {message: 'COVID Testing Facilities - Find the closest location.'},
+  geoclientUrl: urls.GEOCLIENT_URL,
+  facilityUrl: urls.FACILITY_CSV_URL,
+  facilityStyle: style,
+  facilitySearch: { displayField: 'search_label', nameField: 'Full site name' },
+  facilityFormat: new CsvAddr({
+    geocoder: new Geoclient({url: urls.GEOCLIENT_URL}),
+    locationTemplate: '${Address}, ${Borough}'
+  }),
+  filterChoiceOptions: [{
+    title: 'Location type',
+    choices: [
+      { name: 'Type', values: ['H+H community clinic'], label: 'H+H community clinic', checked: true },
+      { name: 'Type', values: ['H+H Hospital'], label: 'H+H Hospital', checked: true },
+      { name: 'Type', values: ['One Medical'], label: 'One Medical', checked: true }
+    ]
+  },{
+    title: 'Walk in',
+    choices: [
+      { name: 'Walk-in?', values: ['Y'], label: 'Yes', checked: true },
+      { name: 'Walk-in?', values: ['N'], label: 'No', checked: true }]
+  },{
+    title: 'NYCHA priority site',
+    choices: [
+      { name: 'NYCHA priority site?', values: ['Y'], label: 'Yes', checked: true },
+      { name: 'NYCHA priority site?', values: [''], label: 'No', checked: true }]
+  }],
+  decorations,
+  directionsUrl: urls.DIRECTIONS_URL
+}
+
+const optionsWOsplash = {
+  title: 'COVID Testing Facilities',
+  facilityTabTitle: 'Testing Facilities',
+  geoclientUrl: urls.GEOCLIENT_URL,
+  facilityUrl: urls.FACILITY_CSV_URL,
+  facilityStyle: style,
+  facilitySearch: { displayField: 'search_label', nameField: 'Full site name' },
+  facilityFormat: new CsvAddr({
+    geocoder: new Geoclient({url: urls.GEOCLIENT_URL}),
+    locationTemplate: '${Address}, ${Borough}'
+  }),
+  filterChoiceOptions: [{
+    title: 'Location type',
+    choices: [
+      { name: 'Type', values: ['H+H community clinic'], label: 'H+H community clinic', checked: true },
+      { name: 'Type', values: ['H+H Hospital'], label: 'H+H Hospital', checked: true },
+      { name: 'Type', values: ['One Medical'], label: 'One Medical', checked: true }
+    ]
+  },{
+    title: 'Walk in',
+    choices: [
+      { name: 'Walk-in?', values: ['Y'], label: 'Yes', checked: true },
+      { name: 'Walk-in?', values: ['N'], label: 'No', checked: true }]
+  },{
+    title: 'NYCHA priority site',
+    choices: [
+      { name: 'NYCHA priority site?', values: ['Y'], label: 'Yes', checked: true },
+      { name: 'NYCHA priority site?', values: [''], label: 'No', checked: true }]
+  }],
+  decorations,
+  directionsUrl: urls.DIRECTIONS_URL
+}
 
 beforeEach(() => {
   FinderApp.mockClear()
@@ -25,22 +95,7 @@ describe('constructor', () => {
     const app = new App()
   
     expect(FinderApp).toHaveBeenCalledTimes(1)
-    expect(FinderApp.mock.calls[0][0]).toEqual({
-      title: 'Face Coverings Distribution',
-      facilityTabTitle: 'Locations',
-      splashOptions: {message: 'COVID Testing Facilities - Find the closest location.'},
-      geoclientUrl: urls.GEOCLIENT_URL,
-      facilityUrl: urls.FACILITY_CSV_URL,
-      facilityStyle: style,
-      facilitySearch: { displayField: 'search_label', nameField: 'name' },
-      facilityFormat: new CsvPoint({
-        x: 'x',
-        y: 'y',
-        dataProjection: 'EPSG:2263'
-      }),
-      decorations: decorations,
-      directionsUrl: urls.DIRECTIONS_URL
-    })
+    expect(JSON.stringify(FinderApp.mock.calls[0][0])).toBe(JSON.stringify(optionsWsplash))
   })
   
   test('constructor w/o splash', () => {
@@ -51,21 +106,7 @@ describe('constructor', () => {
     const app = new App()
   
     expect(FinderApp).toHaveBeenCalledTimes(1)
-    expect(FinderApp.mock.calls[0][0]).toEqual({
-      title: 'Face Coverings Distribution',
-      facilityTabTitle: 'Locations',
-      geoclientUrl: urls.GEOCLIENT_URL,
-      facilityUrl: urls.FACILITY_CSV_URL,
-      facilityStyle: style,
-      facilitySearch: { displayField: 'search_label', nameField: 'name' },
-      facilityFormat: new CsvPoint({
-        x: 'x',
-        y: 'y',
-        dataProjection: 'EPSG:2263'
-      }),
-      decorations: decorations,
-      directionsUrl: urls.DIRECTIONS_URL
-    })
+    expect(JSON.stringify(FinderApp.mock.calls[0][0])).toBe(JSON.stringify(optionsWOsplash))
   })
 })
 
