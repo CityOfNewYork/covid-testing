@@ -1,7 +1,7 @@
 {
-  "short_name": "Face Coverings Distribution",
-  "name": "Face Coverings Distribution",
-  "description": "Face coverings are being distributed in parks across NYC. Find the closest location.",
+  "short_name": "COVID Testing Facility Finder",
+  "name": "COVID Testing Facility Finder",
+  "description": "COVID Testing Facilities - Find the closest location.",
   "start_url": "index.html",
   "icons": [
   ],
