@@ -20,6 +20,8 @@ const screenReaderNote = `<h1 style="color:red">Important</h1>
   </a>
 </p>`
 
+FinderApp.SCREEN_READER_INFO = screenReaderNote + FinderApp.SCREEN_READER_INFO
+
 const filters = [{
   title: 'Location type',
   choices: [
@@ -57,7 +59,6 @@ class App extends FinderApp {
       decorations,
       directionsUrl: urls.DIRECTIONS_URL
     })
-    $('.screen-reader-info .dia-msg').prepend(screenReaderNote)
   }
   located (location) {
     super.located(location)
@@ -79,4 +80,3 @@ App.getSplashOptions = search => {
 }
 
 export default App
-
