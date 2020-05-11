@@ -1,4 +1,5 @@
-import proj4 from 'proj4'
+import $ from 'jquery'
+import nyc from 'nyc-lib/nyc'
 
 export default [{
   extendFeature() {
