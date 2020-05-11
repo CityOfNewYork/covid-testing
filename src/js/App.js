@@ -35,8 +35,13 @@ const filters = [{
 },{
   title: 'Walk in',
   choices: [
-    { name: 'Walk in?', values: ['Y'], label: 'Yes', checked: true },
-    { name: 'Walk in?', values: ['N'], label: 'No', checked: true }]
+    { name: 'Walk-in?', values: ['Y'], label: 'Yes', checked: true },
+    { name: 'Walk-in?', values: ['N'], label: 'No', checked: true }]
+},{
+  title: 'NYCHA priority site',
+  choices: [
+    { name: 'NYCHA priority site?', values: ['Y'], label: 'Yes', checked: true },
+    { name: 'NYCHA priority site?', values: [''], label: 'No', checked: true }]
 }]
 
 class App extends FinderApp {
