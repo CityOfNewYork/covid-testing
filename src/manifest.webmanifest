@@ -1,0 +1,11 @@
+{
+  "short_name": "Face Coverings Distribution",
+  "name": "Face Coverings Distribution",
+  "description": "Face coverings are being distributed in parks across NYC. Find the closest location.",
+  "start_url": "index.html",
+  "icons": [
+  ],
+  "background_color": "#1e90ff",
+  "theme_color": "#D8D8D8",
+  "display": "standalone"
+}
