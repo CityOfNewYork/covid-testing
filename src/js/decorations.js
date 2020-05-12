@@ -38,18 +38,19 @@ export default [{
     const appointmentInfo =  this.info('APPOINTMENT_INFO')
     const criterior =  this.info('PRIORITIZATION_CRITERIA')
     const details = $('<div class="detail"></div>')
-      .append(`<div><strong>Testing type: </strong> ${this.get('TESTING_TYPE')}</div>`)
+      .append(`<div><strong>Open: </strong> ${this.get('DAYS_OF_OPERATION')}, ${this.get('HOURS_OF_OPERATION')}</div>`)
       .append(`<div><strong>Walk in facility: </strong> ${walkIn}</div>`)
       .append(`<div><strong>NYCHA priority site: </strong> ${nycha}</div>`)
-      if (locationInfo) {
-        details.append(`<div><strong>Location information:<br></strong> ${locationInfo}</div>`)
-      }
-      if (appointmentInfo) {
-        details.append(`<div><strong>Appointment information:<br></strong> ${appointmentInfo}</div>`)
-      }
-      if (criterior) {
-        details.append(`<div><strong>Prioritization criteria:<br></strong> ${criterior}</div>`)
-      }
+      .append(`<div><strong>Testing type: </strong> ${this.get('TESTING_TYPE')}</div>`)
+    if (locationInfo) {
+      details.append(`<div><strong>Location information:<br></strong> ${locationInfo}</div>`)
+    }
+    if (appointmentInfo) {
+      details.append(`<div><strong>Appointment information:<br></strong> ${appointmentInfo}</div>`)
+    }
+    if (criterior) {
+      details.append(`<div><strong>Prioritization criteria:<br></strong> ${criterior}</div>`)
+    }
     return details
   }
 }]
