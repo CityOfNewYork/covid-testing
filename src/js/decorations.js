@@ -1,5 +1,4 @@
 import $ from 'jquery'
-import nyc from 'nyc-lib/nyc'
 
 export default [{
   extendFeature() {
@@ -9,45 +8,48 @@ export default [{
       '</span></b><br><span class="srch-lbl-sm">' + this.getFullAddress() + '</span>'
     )
   },
-  html() {
-    return $('<div class="facility"></div>')
-      .addClass(this.cssClass())
-      .append(this.distanceHtml())
-      .append(this.nameHtml())
-      .append(this.distanceHtml(true))
-      .append(this.addressHtml())
-      .append(this.details())
-      .append(this.mapButton())
-      .append(this.directionsButton())
-      .data('feature', this)
-      .mouseover($.proxy(this.handleOver, this))
-      .mouseout($.proxy(this.handleOut, this))
-  },
   getFullAddress() {
-    return `${this.get('Address')}, ${this.get('Borough')}, NY`
+    return `${this.get('ADDRESS')}, ${this.get('BOROUGH')}, NY`
   },
   getName() {
-    return this.get('Full site name')
+    return this.get('NAME')
   },
   getAddress1() {
-    return this.get('Address')
+    return this.get('ADDRESS')
   },
   getCityStateZip() {
-    return `${this.get('Borough')}, NY`
+    return `${this.get('BOROUGH')}, NY`
   },
   getTip() {
     return this.get('search_label')
   },
-  details() {
-    const walkIn = this.get('Walk-in?') === 'Y' ? 'Yes' : 'No'
-    const nycha = this.get('NYCHA priority site?') === 'Y' ? 'Yes' : 'No'
-    const criterior =  this.get('Prioritization criteria')
+  info(prop) {
+    let info = this.get(prop)
+    if (info) {
+      info = info.replace(/(https?:\/\/[^\s]+)/g, `<a href="$1">$1</a>`)
+      info = info.replace(/(\([0-9]{3}\) [0-9]{3}-[0-9]{4})+/g, '<a href="$1">$1</a>')
+      return info
+    }
+  },
+  detailsHtml() {
+    const walkIn = this.get('WALK_IN') === 'Y' ? 'Yes' : 'No'
+    const nycha = this.get('NYCHA_PRIORITY') === 'Y' ? 'Yes' : 'No'
+    const locationInfo =  this.info('LOCATION_INFO')
+    const appointmentInfo =  this.info('APPOINTMENT_INFO')
+    const criterior =  this.info('PRIORITIZATION_CRITERIA')
     const details = $('<div class="detail"></div>')
+      .append(`<div><strong>Testing type: </strong> ${this.get('TESTING_TYPE')}</div>`)
       .append(`<div><strong>Walk in facility: </strong> ${walkIn}</div>`)
       .append(`<div><strong>NYCHA priority site: </strong> ${nycha}</div>`)
-    if (criterior) {
-      details.append(`<div><strong>Prioritization criteria:<br></strong> ${criterior}</div>`)
-    }
+      if (locationInfo) {
+        details.append(`<div><strong>Location information:<br></strong> ${locationInfo}</div>`)
+      }
+      if (appointmentInfo) {
+        details.append(`<div><strong>Appointment information:<br></strong> ${appointmentInfo}</div>`)
+      }
+      if (criterior) {
+        details.append(`<div><strong>Prioritization criteria:<br></strong> ${criterior}</div>`)
+      }
     return details
   }
 }]

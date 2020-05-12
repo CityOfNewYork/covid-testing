@@ -1,5 +1,3 @@
-import $ from 'jquery'
-import nyc from 'nyc-lib/nyc'
 import urls from './urls'
 import style from './style'
 import decorations from './decorations'
@@ -25,20 +23,29 @@ FinderApp.SCREEN_READER_INFO = screenReaderNote + FinderApp.SCREEN_READER_INFO
 const filters = [{
   title: 'Location type',
   choices: [
-    { name: 'Type', values: ['H+H community clinic'], label: 'H+H community clinic', checked: true },
-    { name: 'Type', values: ['H+H Hospital'], label: 'H+H Hospital', checked: true },
-    { name: 'Type', values: ['One Medical'], label: 'One Medical', checked: true }
+    {name: 'FACILITY_TYPE', values: ['H+H community clinic'], label: 'H+H community clinic', checked: true},
+    {name: 'FACILITY_TYPE', values: ['H+H Hospital'], label: 'H+H Hospital', checked: true},
+    {name: 'FACILITY_TYPE', values: ['One Medical'], label: 'One Medical', checked: true},
+    {name: 'FACILITY_TYPE', values: ['Antibody survey'], label: 'Antibody survey', checked: true}
   ]
-},{
+}, {
   title: 'Walk in',
   choices: [
-    { name: 'Walk-in?', values: ['Y'], label: 'Yes', checked: true },
-    { name: 'Walk-in?', values: ['N'], label: 'No', checked: true }]
-},{
+    {name: 'WALK_IN', values: ['Y'], label: 'Yes', checked: true},
+    {name: 'WALK_IN', values: ['', 'N'], label: 'No', checked: true}
+  ]
+}, {
+  title: 'Testing type',
+  choices: [
+    {name: 'TESTING_TYPE', values: ['Diagnostic'], label: 'Diagnostic', checked: true},
+    {name: 'TESTING_TYPE', values: ['Antibody'], label: 'Antibody', checked: true}
+  ]
+}, {
   title: 'NYCHA priority site',
   choices: [
-    { name: 'NYCHA priority site?', values: ['Y'], label: 'Yes', checked: true },
-    { name: 'NYCHA priority site?', values: [''], label: 'No', checked: true }]
+    {name: 'NYCHA_PRIORITY', values: ['Y'], label: 'Yes', checked: true},
+    {name: 'NYCHA_PRIORITY', values: ['', 'N'], label: 'No', checked: true}
+  ]
 }]
 
 class App extends FinderApp {
@@ -53,7 +60,7 @@ class App extends FinderApp {
       facilitySearch: { displayField: 'search_label', nameField: 'Full site name' },
       facilityFormat: new CsvAddr({
         geocoder: new Geoclient({url: urls.GEOCLIENT_URL}),
-        locationTemplate: '${Address}, ${Borough}'
+        locationTemplate: '${ADDRESS}, ${BOROUGH}'
       }),
       filterChoiceOptions: filters,
       decorations,

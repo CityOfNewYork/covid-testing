@@ -2,18 +2,21 @@ import $ from 'jquery'
 import decorations from '../src/js/decorations'
 import Feature from 'ol/Feature'
 
-const feature = new Feature({
-  "Full site name": 'fullSiteName',
-  "Address": 'Address',
-  "Borough": 'Borough',
-  "Type": 'Type',
-  "Testing type": 'Testing Type',
-  "NYCHA priority site?": 'Y',
-  "Walk-in?": 'Y',
-  "Prioritization criteria": 'Criteria'
-})
+let feature
 
 beforeEach(() => {
+  feature = new Feature({
+    NAME: 'fullSiteName',
+    ADDRESS: 'Address',
+    BOROUGH: 'Borough',
+    FACILITY_TYPE: 'Type',
+    TESTING_TYPE: 'Testing Type',
+    NYCHA_PRIORITY: 'Y',
+    WALK_IN: 'Y',
+    PRIORITIZATION_CRITERIA: 'Criteria',
+    LOCATION_INFO: 'Location info',
+    APPOINTMENT_INFO: 'Location info'
+  })
   decorations[0].cssClass = jest.fn()
   decorations[0].distanceHtml = jest.fn()
   decorations[0].nameHtml = jest.fn()
@@ -34,22 +37,6 @@ test('extendFeature', () => {
   )
 })
 
-test('html', () => {
-  expect.assertions(6)
-  const html = feature.html()
-
-  expect(html.data('feature')).toBe(feature)
-  expect(decorations[0].handleOver).toHaveBeenCalledTimes(0)
-  html.trigger('mouseover')
-  expect(decorations[0].handleOver).toHaveBeenCalledTimes(1)
-
-  expect(decorations[0].handleOut).toHaveBeenCalledTimes(0)
-  html.trigger('mouseout')
-  expect(decorations[0].handleOut).toHaveBeenCalledTimes(1)
-
-  expect($('<div></div>').html(html).html()).toBe('<div class="facility"><div class="detail"><div><strong>Walk in facility: </strong> Yes</div><div><strong>NYCHA priority site: </strong> Yes</div><div><strong>Prioritization criteria:<br></strong> Criteria</div></div></div>')
-})
-
 test('getFullAddress', () => {
   expect.assertions(1)
 
@@ -61,6 +48,7 @@ test('getName', () => {
 
   expect(feature.getName()).toBe('fullSiteName')
 })
+
 test('getAddress1', () => {
   expect.assertions(1)
 
@@ -72,59 +60,26 @@ test('getCityStateZip', () => {
 
   expect(feature.getCityStateZip()).toBe('Borough, NY')
 })
+
 test('getTip', () => {
   expect.assertions(1)
 
   expect(feature.getTip()).toBe(feature.get('search_label'))
 })
-describe('details', () => {
-  afterEach(() => {
-    feature.set('Walk-in?', 'Y')
-    feature.set('NYCHA priority site?', 'Y')
-    feature.set('Prioritization criteria', 'Criteria')
-  })
-  test('details : walk-in', () => {
-    expect.assertions(2)
 
-    const div = $('<div></div>')
+test('details', () => {
+  expect.assertions(2)
 
-    feature.set('Walk-in?', 'Y')
-    div.html(feature.details())
-    expect(div.html()).toBe('<div class="detail"><div><strong>Walk in facility: </strong> Yes</div><div><strong>NYCHA priority site: </strong> Yes</div><div><strong>Prioritization criteria:<br></strong> Criteria</div></div>')
- 
+  const div = $('<div></div>') 
 
-    feature.set('Walk-in?', 'N')
-    div.html(feature.details())
-    expect(div.html()).toBe('<div class="detail"><div><strong>Walk in facility: </strong> No</div><div><strong>NYCHA priority site: </strong> Yes</div><div><strong>Prioritization criteria:<br></strong> Criteria</div></div>')
-  })
+  div.html(feature.detailsHtml())
+  expect(div.html()).toBe('<div class="detail"><div><strong>Testing type: </strong> Testing Type</div><div><strong>Walk in facility: </strong> Yes</div><div><strong>NYCHA priority site: </strong> Yes</div><div><strong>Location information:<br></strong> Location info</div><div><strong>Appointment information:<br></strong> Location info</div><div><strong>Prioritization criteria:<br></strong> Criteria</div></div>')
 
-  test('details : nycha', () => {
-    expect.assertions(2)
-
-    const div = $('<div></div>')
-
-    feature.set('NYCHA priority site?', 'Y')
-    div.html(feature.details())
-    expect(div.html()).toBe('<div class="detail"><div><strong>Walk in facility: </strong> Yes</div><div><strong>NYCHA priority site: </strong> Yes</div><div><strong>Prioritization criteria:<br></strong> Criteria</div></div>')
-
-    feature.set('NYCHA priority site?', 'N')
-    div.html(feature.details())
-    expect(div.html()).toBe('<div class="detail"><div><strong>Walk in facility: </strong> Yes</div><div><strong>NYCHA priority site: </strong> No</div><div><strong>Prioritization criteria:<br></strong> Criteria</div></div>')
-
-  })
-  test('details : criteria', () => {
-    expect.assertions(2)
-
-    const div = $('<div></div>')
-
-    feature.set('Prioritization criteria', 'Criteria')
-    div.html(feature.details())
-    expect(div.html()).toBe('<div class="detail"><div><strong>Walk in facility: </strong> Yes</div><div><strong>NYCHA priority site: </strong> Yes</div><div><strong>Prioritization criteria:<br></strong> Criteria</div></div>')
-
-    feature.set('Prioritization criteria', '')
-    div.html(feature.details())
-    expect(div.html()).toBe('<div class="detail"><div><strong>Walk in facility: </strong> Yes</div><div><strong>NYCHA priority site: </strong> Yes</div></div>')
-
-  })
+  feature.set('LOCATION_INFO', '')
+  feature.set('APPOINTMENT_INFO', '')
+  feature.set('PRIORITIZATION_CRITERIA', '')
+  feature.set('WALK_IN', 'N')
+  feature.set('NYCHA_PRIORITY', 'N')
+  div.html(feature.detailsHtml())
+  expect(div.html()).toBe('<div class="detail"><div><strong>Testing type: </strong> Testing Type</div><div><strong>Walk in facility: </strong> No</div><div><strong>NYCHA priority site: </strong> No</div></div>')
 })
-
