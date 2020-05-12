@@ -26,7 +26,7 @@ const optionsWsplash = {
   filterChoiceOptions: [{
     title: 'Location type',
     choices: [
-      {name: 'FACILITY_TYPE', values: ['H+H community clinic'], label: 'H+H community clinic', checked: true},
+      {name: 'FACILITY_TYPE', values: ['H+H community site'], label: 'H+H community site', checked: true},
       {name: 'FACILITY_TYPE', values: ['H+H Hospital'], label: 'H+H Hospital', checked: true},
       {name: 'FACILITY_TYPE', values: ['One Medical'], label: 'One Medical', checked: true},
       {name: 'FACILITY_TYPE', values: ['Antibody survey'], label: 'Antibody survey', checked: true}
@@ -68,7 +68,7 @@ const optionsWOsplash = {
   filterChoiceOptions: [{
     title: 'Location type',
     choices: [
-      {name: 'FACILITY_TYPE', values: ['H+H community clinic'], label: 'H+H community clinic', checked: true},
+      {name: 'FACILITY_TYPE', values: ['H+H community site'], label: 'H+H community site', checked: true},
       {name: 'FACILITY_TYPE', values: ['H+H Hospital'], label: 'H+H Hospital', checked: true},
       {name: 'FACILITY_TYPE', values: ['One Medical'], label: 'One Medical', checked: true},
       {name: 'FACILITY_TYPE', values: ['Antibody survey'], label: 'Antibody survey', checked: true}
