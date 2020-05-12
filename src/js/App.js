@@ -51,8 +51,8 @@ const filters = [{
 class App extends FinderApp {
   constructor() {
     super({
-      title: 'COVID Testing Facilities',
-      facilityTabTitle: 'Testing Facilities',
+      title: 'COVID-19 Testing Sites',
+      facilityTabTitle: 'Testing Sites',
       splashOptions: App.getSplashOptions(document.location.search),
       geoclientUrl: urls.GEOCLIENT_URL,
       facilityUrl: urls.FACILITY_CSV_URL,

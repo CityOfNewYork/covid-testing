@@ -12,8 +12,8 @@ import Point from 'ol/geom/Point'
 jest.mock('nyc-lib/nyc/ol/FinderApp')
 
 const optionsWsplash = {
-  title: 'COVID Testing Facilities',
-  facilityTabTitle: 'Testing Facilities',
+  title: 'COVID-19 Testing Sites',
+  facilityTabTitle: 'Testing Sites',
   splashOptions: {message: 'COVID Testing Facilities - Find the closest location.'},
   geoclientUrl: urls.GEOCLIENT_URL,
   facilityUrl: urls.FACILITY_CSV_URL,
@@ -55,8 +55,8 @@ const optionsWsplash = {
 }
 
 const optionsWOsplash = {
-  title: 'COVID Testing Facilities',
-  facilityTabTitle: 'Testing Facilities',
+  title: 'COVID-19 Testing Sites',
+  facilityTabTitle: 'Testing Sites',
   geoclientUrl: urls.GEOCLIENT_URL,
   facilityUrl: urls.FACILITY_CSV_URL,
   facilityStyle: style,
