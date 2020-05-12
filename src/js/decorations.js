@@ -27,7 +27,7 @@ export default [{
     let info = this.get(prop)
     if (info) {
       info = info.replace(/(https?:\/\/[^\s]+)/g, `<a href="$1">$1</a>`)
-      info = info.replace(/(\([0-9]{3}\) [0-9]{3}-[0-9]{4})+/g, '<a href="$1">$1</a>')
+      info = info.replace(/(\([0-9]{3}\) [0-9]{3}-[0-9]{4})+/g, '<a href="tel:$1">$1</a>')
       return info
     }
   },
