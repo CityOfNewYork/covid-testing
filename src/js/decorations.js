@@ -43,7 +43,7 @@ export default [{
       .append(`<div><strong>NYCHA priority site: </strong> ${nycha}</div>`)
       .append(`<div><strong>Testing type: </strong> ${this.get('TESTING_TYPE')}</div>`)
     if (locationInfo) {
-      details.append(`<div><strong>Location information:<br></strong> ${locationInfo}</div>`)
+      details.append(`<div><strong>Location information: </strong> ${locationInfo}</div>`)
     }
     if (appointmentInfo) {
       details.append(`<div><strong>Appointment information:<br></strong> ${appointmentInfo}</div>`)
