@@ -52,6 +52,11 @@ div.route .adp-placemark * {
     background-color: #803D8D;
     width: 100%;
   }
+  .fnd .splash .dia {
+    width: auto;
+    left: 0;
+    right: 0;
+  }  
 }
 @media only screen and (max-width : 400px) {
   .fnd #banner * {

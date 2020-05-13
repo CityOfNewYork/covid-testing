@@ -27,19 +27,24 @@ const filters = [{
     {name: 'FACILITY_TYPE', values: ['One Medical'], label: 'One Medical', checked: true},
     {name: 'FACILITY_TYPE', values: ['Antibody survey'], label: 'Antibody survey', checked: true}
   ]
-}, {
+},
+{
   title: 'Walk in',
   choices: [
     {name: 'WALK_IN', values: ['Y'], label: 'Yes', checked: true},
     {name: 'WALK_IN', values: ['', 'N'], label: 'No', checked: true}
   ]
-}, {
+},
+/*
+{
   title: 'Testing type',
   choices: [
     {name: 'TESTING_TYPE', values: ['Diagnostic'], label: 'Diagnostic', checked: true},
     {name: 'TESTING_TYPE', values: ['Antibody'], label: 'Antibody', checked: true}
   ]
-}, {
+},
+*/
+{
   title: 'NYCHA priority site',
   choices: [
     {name: 'NYCHA_PRIORITY', values: ['Y'], label: 'Yes', checked: true},
