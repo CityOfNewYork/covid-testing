@@ -1,12 +1,21 @@
 import $ from 'jquery'
 
-export default [{
+const TODAY = new Date().toISOString().split('T')[0]
+
+const notOpenYet = []
+
+const decorations = {
   extendFeature() {
-    this.set(
-      'search_label',
-      '<b><span class="srch-lbl-lg">' + this.getName() + 
-      '</span></b><br><span class="srch-lbl-sm">' + this.getFullAddress() + '</span>'
-    )
+    const start = this.get('START_DATE')
+    if (start > TODAY) {
+      notOpenYet.push(this)
+    } else {
+      this.set(
+        'search_label',
+        '<b><span class="srch-lbl-lg">' + this.getName() + 
+        '</span></b><br><span class="srch-lbl-sm">' + this.getFullAddress() + '</span>'
+      )
+    }
   },
   getFullAddress() {
     return `${this.get('ADDRESS')}, ${this.get('BOROUGH')}, NY`
@@ -53,4 +62,6 @@ export default [{
     }
     return details
   }
-}]
+}
+
+export default {notOpenYet, decorations}

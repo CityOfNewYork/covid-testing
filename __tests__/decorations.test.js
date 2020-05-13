@@ -4,6 +4,8 @@ import Feature from 'ol/Feature'
 
 let feature
 
+console.warn(decorations);
+
 beforeEach(() => {
   feature = new Feature({
     NAME: 'fullSiteName',
@@ -19,16 +21,18 @@ beforeEach(() => {
     DAYS_OF_OPERATION: 'this - that',
     HOURS_OF_OPERATION: 'now - later'
   })
-  decorations[0].cssClass = jest.fn()
-  decorations[0].distanceHtml = jest.fn()
-  decorations[0].nameHtml = jest.fn()
-  decorations[0].addressHtml = jest.fn()
-  decorations[0].mapButton = jest.fn()
-  decorations[0].directionsButton = jest.fn()
-  decorations[0].handleOver = jest.fn()
-  decorations[0].handleOut = jest.fn()
-  decorations[0].handleOver = jest.fn()
-  Object.assign(feature, decorations[0])
+  decorations.decorations.cssClass = jest.fn()
+  decorations.decorations.distanceHtml = jest.fn()
+  decorations.decorations.nameHtml = jest.fn()
+  decorations.decorations.addressHtml = jest.fn()
+  decorations.decorations.mapButton = jest.fn()
+  decorations.decorations.directionsButton = jest.fn()
+  decorations.decorations.handleOver = jest.fn()
+  decorations.decorations.handleOut = jest.fn()
+  decorations.decorations.handleOver = jest.fn()
+  Object.assign(feature, decorations.decorations)
+  console.warn(decorations);
+
 })
 
 test('extendFeature', () => {

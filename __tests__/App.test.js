@@ -1,8 +1,7 @@
 import $ from 'jquery'
 import App from '../src/js/App'
 import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
-import CsvAddr from 'nyc-lib/nyc/ol/format/CsvAddr'
-import Geoclient from 'nyc-lib/nyc/Geoclient'
+import CsvPoint from 'nyc-lib/nyc/ol/format/CsvPoint'
 import urls from '../src/js/urls'
 import style from '../src/js/style'
 import decorations from '../src/js/decorations'
@@ -19,9 +18,10 @@ const optionsWsplash = {
   facilityUrl: urls.FACILITY_CSV_URL,
   facilityStyle: style,
   facilitySearch: { displayField: 'search_label', nameField: 'Full site name' },
-  facilityFormat: new CsvAddr({
-    geocoder: new Geoclient({url: urls.GEOCLIENT_URL}),
-    locationTemplate: '${ADDRESS}, ${BOROUGH}'
+  facilityFormat: new CsvPoint({
+    x: 'X',
+    y: 'Y',
+    dataProjection: 'EPSG:2263'
   }),
   filterChoiceOptions: [{
     title: 'Location type',
@@ -50,7 +50,7 @@ const optionsWsplash = {
       {name: 'NYCHA_PRIORITY', values: ['', 'N'], label: 'No', checked: true}
     ]
   }],
-  decorations,
+  decorations: [decorations.decorations],
   directionsUrl: urls.DIRECTIONS_URL
 }
 
@@ -61,9 +61,10 @@ const optionsWOsplash = {
   facilityUrl: urls.FACILITY_CSV_URL,
   facilityStyle: style,
   facilitySearch: { displayField: 'search_label', nameField: 'Full site name' },
-  facilityFormat: new CsvAddr({
-    geocoder: new Geoclient({url: urls.GEOCLIENT_URL}),
-    locationTemplate: '${ADDRESS}, ${BOROUGH}'
+  facilityFormat: new CsvPoint({
+    x: 'X',
+    y: 'Y',
+    dataProjection: 'EPSG:2263'
   }),
   filterChoiceOptions: [{
     title: 'Location type',
@@ -92,7 +93,7 @@ const optionsWOsplash = {
       {name: 'NYCHA_PRIORITY', values: ['', 'N'], label: 'No', checked: true}
     ]
   }],
-  decorations,
+  decorations: [decorations.decorations],
   directionsUrl: urls.DIRECTIONS_URL
 }
 

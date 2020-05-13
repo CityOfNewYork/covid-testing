@@ -1,8 +1,7 @@
 import urls from './urls'
 import style from './style'
 import decorations from './decorations'
-import Geoclient from 'nyc-lib/nyc/Geoclient'
-import CsvAddr from 'nyc-lib/nyc/ol/format/CsvAddr'
+import CsvPoint from 'nyc-lib/nyc/ol/format/CsvPoint'
 import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
 import Point from 'ol/geom/Point'
 import {extend} from 'ol/extent'
@@ -58,12 +57,13 @@ class App extends FinderApp {
       facilityUrl: urls.FACILITY_CSV_URL,
       facilityStyle: style,
       facilitySearch: { displayField: 'search_label', nameField: 'Full site name' },
-      facilityFormat: new CsvAddr({
-        geocoder: new Geoclient({url: urls.GEOCLIENT_URL}),
-        locationTemplate: '${ADDRESS}, ${BOROUGH}'
+      facilityFormat: new CsvPoint({
+        x: 'X',
+        y: 'Y',
+        dataProjection: 'EPSG:2263'
       }),
       filterChoiceOptions: filters,
-      decorations,
+      decorations: [decorations.decorations],
       directionsUrl: urls.DIRECTIONS_URL
     })
   }
@@ -77,6 +77,12 @@ class App extends FinderApp {
     extent = extend(extent, features[0].getGeometry().getExtent())
     extent = [extent[0] - 100, extent[1] - 100, extent[2] + 100, extent[3] + 100]
     this.view.fit(extent, {size: this.map.getSize(), duration: 500})
+  }
+  ready(features) {
+    decorations.notOpenYet.forEach(feature => {
+      this.source.removeFeature(feature)
+    })
+    super.ready(this.source.getFeatures())
   }
 }
 
