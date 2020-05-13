@@ -4,7 +4,7 @@ import decorations from './decorations'
 import CsvPoint from 'nyc-lib/nyc/ol/format/CsvPoint'
 import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
 import Point from 'ol/geom/Point'
-import {extend} from 'ol/extent'
+import {extend, getWidth} from 'ol/extent'
 
 const screenReaderNote = `<h1 style="color:red">Important</h1>
 <p style="color:red">
@@ -88,7 +88,11 @@ class App extends FinderApp {
     const features = this.source.nearest(coord, 1)
     extent = extend(extent, features[0].getGeometry().getExtent())
     extent = [extent[0] - 100, extent[1] - 100, extent[2] + 100, extent[3] + 100]
-    this.view.fit(extent, {size: this.map.getSize(), duration: 500})
+    if (getWidth(extent) === 200) {
+      this.view.animate({center: coord, zoom: 17})
+    } else {
+      this.view.fit(extent, {size: this.map.getSize(), duration: 500})
+    }
   }
   ready(features) {
     decorations.notOpenYet.forEach(feature => {

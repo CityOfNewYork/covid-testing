@@ -190,32 +190,104 @@ test('located', () => {
   expect(app.zoomToExtent.mock.calls[0][0]).toBe('mock-coord')
 })
 
-test('zoomToExtent', () => {
-  expect.assertions(6)
-
-  const feature = new Feature({
-    geometry: new Point([1, 2])
+describe('zoomToExtent', () => {
+  test('zoomToExtent with nearest facility', () => {
+    expect.assertions(8)
+  
+    const feature = new Feature({
+      geometry: new Point([1, 2])
+    })
+  
+    const app = new App()
+    app.view = {
+      fit: jest.fn(),
+      animate: jest.fn()
+    }
+    app.map = {
+      getSize: jest.fn().mockImplementation(() => {
+        return 'mock-size'
+      })
+    }
+    app.source = {
+      nearest: jest.fn().mockImplementation(() => {
+        return [feature]
+      })
+    }
+  
+    app.zoomToExtent([10, 20])
+  
+    expect(app.source.nearest).toHaveBeenCalledTimes(1)
+    expect(app.source.nearest.mock.calls[0][0]).toEqual([10, 20])
+    expect(app.source.nearest.mock.calls[0][1]).toBe(1)
+    expect(app.view.animate).toHaveBeenCalledTimes(0)
+    expect(app.map.getSize).toHaveBeenCalledTimes(1)
+    expect(app.view.fit).toHaveBeenCalledTimes(1)
+    expect(app.view.fit.mock.calls[0][0]).toEqual([-99, -98, 110, 120])
+    expect(app.view.fit.mock.calls[0][1]).toEqual({size: 'mock-size', duration: 500})
   })
 
-  const app = new App()
-  app.view = {fit: jest.fn()}
-  app.map = {
-    getSize: jest.fn().mockImplementation(() => {
-      return 'mock-size'
+  test('zoomToExtent at facility', () => {
+    expect.assertions(8)
+  
+    const feature = new Feature({
+      geometry: new Point([1, 2])
     })
-  }
-  app.source = {
-    nearest: jest.fn().mockImplementation(() => {
-      return [feature]
-    })
-  }
+  
+    const app = new App()
+    app.view = {
+      fit: jest.fn(),
+      animate: jest.fn()
+    }
+    app.map = {
+      getSize: jest.fn().mockImplementation(() => {
+        return 'mock-size'
+      })
+    }
+    app.source = {
+      nearest: jest.fn().mockImplementation(() => {
+        return [feature]
+      })
+    }
+  
+    app.zoomToExtent([1, 2])
+  
+    expect(app.source.nearest).toHaveBeenCalledTimes(1)
+    expect(app.source.nearest.mock.calls[0][0]).toEqual([1, 2])
+    expect(app.source.nearest.mock.calls[0][1]).toBe(1)
+    expect(app.view.animate).toHaveBeenCalledTimes(1)
+    expect(app.map.getSize).toHaveBeenCalledTimes(0)
+    expect(app.view.fit).toHaveBeenCalledTimes(0)
+    expect(app.view.animate.mock.calls[0][0].center).toEqual([1, 2])
+    expect(app.view.animate.mock.calls[0][0].zoom).toBe(17)
+  })
+})
 
-  app.zoomToExtent([10, 20])
+describe('ready', () => {
+  beforeEach(() => {
+    decorations.notOpenYet.push('mock-feature')
+  })
+  afterEach(() => {
+    decorations.notOpenYet.length = 0
+  })
 
-  expect(app.source.nearest).toHaveBeenCalledTimes(1)
-  expect(app.source.nearest.mock.calls[0][0]).toEqual([10, 20])
-  expect(app.source.nearest.mock.calls[0][1]).toBe(1)
-  expect(app.view.fit).toHaveBeenCalledTimes(1)
-  expect(app.view.fit.mock.calls[0][0]).toEqual([-99, -98, 110, 120])
-  expect(app.view.fit.mock.calls[0][1]).toEqual({size: 'mock-size', duration: 500})
+  test('ready', () => {
+    expect.assertions(5)
+
+    const app = new App()
+    app.source = {
+      removeFeature: jest.fn(),
+      getFeatures: jest.fn().mockImplementation(() => {
+        return 'mock-features'
+      })
+    }
+
+    app.ready()
+
+    expect(app.source.removeFeature).toHaveBeenCalledTimes(1)
+    expect(app.source.removeFeature.mock.calls[0][0]).toBe('mock-feature')
+    expect(app.source.getFeatures).toHaveBeenCalledTimes(1)
+    expect(FinderApp.prototype.ready).toHaveBeenCalledTimes(1)
+    expect(FinderApp.prototype.ready.mock.calls[0][0]).toBe('mock-features')
+
+  })
 })
