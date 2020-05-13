@@ -24,15 +24,22 @@ const filters = [{
   choices: [
     {name: 'FACILITY_TYPE', values: ['H+H community site'], label: 'H+H community site', checked: true},
     {name: 'FACILITY_TYPE', values: ['H+H Hospital'], label: 'H+H Hospital', checked: true},
-    {name: 'FACILITY_TYPE', values: ['One Medical'], label: 'One Medical', checked: true},
-    {name: 'FACILITY_TYPE', values: ['Antibody survey'], label: 'Antibody survey', checked: true}
+    {name: 'FACILITY_TYPE', values: ['One Medical'], label: 'One Medical', checked: true} //,
+    // {name: 'FACILITY_TYPE', values: ['Antibody survey'], label: 'Antibody survey', checked: true}
   ]
 },
 {
-  title: 'Walk in',
+  title: 'Walk up',
   choices: [
     {name: 'WALK_IN', values: ['Y'], label: 'Yes', checked: true},
     {name: 'WALK_IN', values: ['', 'N'], label: 'No', checked: true}
+  ]
+},
+{
+  title: 'Drive through',
+  choices: [
+    {name: 'DRIVE_THRU', values: ['Y'], label: 'Yes', checked: true},
+    {name: 'DRIVE_THRU', values: ['', 'N'], label: 'No', checked: true}
   ]
 },
 /*
@@ -92,7 +99,7 @@ class App extends FinderApp {
 }
 
 
-const message = `<h1>COVID-19 diagnostic testing</h1>
+const message = `<h1>COVID-19 Diagnostic Testing</h1>
   <p>
     Diagnostic testing is only recommended for those who are symptomatic or have a history of symptoms of COVID-19
     (e.g. fever, cough, and/or trouble breathing), particularly if the individual is 65 years of age or older,

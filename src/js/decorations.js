@@ -42,6 +42,7 @@ const decorations = {
   },
   detailsHtml() {
     const walkIn = this.get('WALK_IN') === 'Y' ? 'Yes' : 'No'
+    const driveTru = this.get('DRIVE_THRU') === 'Y' ? 'Yes' : 'No'
     const nycha = this.get('NYCHA_PRIORITY') === 'Y' ? 'Yes' : 'No'
     const locationInfo =  this.info('LOCATION_INFO')
     const appointmentInfo =  this.info('APPOINTMENT_INFO')
@@ -50,6 +51,7 @@ const decorations = {
     const details = $('<div class="detail"></div>')
       .append(`<div><strong>Open: </strong> ${this.get('DAYS_OF_OPERATION')}, ${this.get('HOURS_OF_OPERATION')}</div>`)
       .append(`<div><strong>Walk up facility: </strong> ${walkIn}</div>`)
+      .append(`<div><strong>Drive through facility: </strong> ${driveTru}</div>`)
       .append(`<div><strong>NYCHA priority site: </strong> ${nycha}</div>`)
       .append(testType ? `<div><strong>Testing type: </strong> ${testType}</div>`: '')
     if (locationInfo) {
