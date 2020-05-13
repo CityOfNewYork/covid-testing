@@ -4,8 +4,6 @@ import Feature from 'ol/Feature'
 
 let feature
 
-console.warn(decorations);
-
 beforeEach(() => {
   feature = new Feature({
     NAME: 'fullSiteName',
@@ -31,8 +29,6 @@ beforeEach(() => {
   decorations.decorations.handleOut = jest.fn()
   decorations.decorations.handleOver = jest.fn()
   Object.assign(feature, decorations.decorations)
-  console.warn(decorations);
-
 })
 
 test('extendFeature', () => {
@@ -79,7 +75,7 @@ test('details', () => {
   const div = $('<div></div>') 
 
   div.html(feature.detailsHtml())
-  expect(div.html()).toBe('<div class="detail"><div><strong>Open: </strong> this - that, now - later</div><div><strong>Walk in facility: </strong> Yes</div><div><strong>NYCHA priority site: </strong> Yes</div><div><strong>Testing type: </strong> Testing Type</div><div><strong>Location information: </strong> Location info</div><div><strong>Appointment information:<br></strong> Location info</div><div><strong>Prioritization criteria:<br></strong> Criteria</div></div>')
+  expect(div.html()).toBe('<div class="detail"><div><strong>Open: </strong> this - that, now - later</div><div><strong>Walk up facility: </strong> Yes</div><div><strong>NYCHA priority site: </strong> Yes</div><div><strong>Testing type: </strong> Testing Type</div><div><strong>Location information: </strong> Location info</div><div><strong>Appointment information:<br></strong> Location info</div><div><strong>Prioritization criteria:<br></strong> Criteria</div></div>')
 
   feature.set('LOCATION_INFO', '')
   feature.set('APPOINTMENT_INFO', '')
@@ -87,5 +83,5 @@ test('details', () => {
   feature.set('WALK_IN', 'N')
   feature.set('NYCHA_PRIORITY', 'N')
   div.html(feature.detailsHtml())
-  expect(div.html()).toBe('<div class="detail"><div><strong>Open: </strong> this - that, now - later</div><div><strong>Walk in facility: </strong> No</div><div><strong>NYCHA priority site: </strong> No</div><div><strong>Testing type: </strong> Testing Type</div></div>')
+  expect(div.html()).toBe('<div class="detail"><div><strong>Open: </strong> this - that, now - later</div><div><strong>Walk up facility: </strong> No</div><div><strong>NYCHA priority site: </strong> No</div><div><strong>Testing type: </strong> Testing Type</div></div>')
 })

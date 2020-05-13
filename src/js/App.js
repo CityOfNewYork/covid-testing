@@ -86,9 +86,23 @@ class App extends FinderApp {
   }
 }
 
+
+const message = `<h1>COVID-19 diagnostic testing</h1>
+  <p>
+    Diagnostic testing is only recommended for those who are symptomatic or have a history of symptoms of COVID-19
+    (e.g. fever, cough, and/or trouble breathing), particularly if the individual is 65 years of age or older,
+    the individual has a compromised immune system, or the individual has an underlying health condition. Diagnostic
+    testing locations can be found on this locator map. To participate in the City of New York’s free antibody testing survey,
+    please call
+  </p>
+  <p><a class="btn rad-all" href="tel:1-888-279-0967">(888) 279-0967</a></p>
+  <p>or visit</p>
+  <p><a class="btn rad-all" href="https://on.nyc.gov/antibody">on.nyc.gov/antibody<a></p>
+  <p>for more information.</p>`
+
 App.getSplashOptions = search => {
   if (search.indexOf('splash=false') === -1) {
-    return {message: 'COVID Testing Facilities - Find the closest location.'}
+    return {message}
   }
 }
 

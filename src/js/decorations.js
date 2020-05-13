@@ -46,11 +46,12 @@ const decorations = {
     const locationInfo =  this.info('LOCATION_INFO')
     const appointmentInfo =  this.info('APPOINTMENT_INFO')
     const criterior =  this.info('PRIORITIZATION_CRITERIA')
+    const testType = this.get('TESTING_TYPE')
     const details = $('<div class="detail"></div>')
       .append(`<div><strong>Open: </strong> ${this.get('DAYS_OF_OPERATION')}, ${this.get('HOURS_OF_OPERATION')}</div>`)
-      .append(`<div><strong>Walk in facility: </strong> ${walkIn}</div>`)
+      .append(`<div><strong>Walk up facility: </strong> ${walkIn}</div>`)
       .append(`<div><strong>NYCHA priority site: </strong> ${nycha}</div>`)
-      .append(`<div><strong>Testing type: </strong> ${this.get('TESTING_TYPE')}</div>`)
+      .append(testType ? `<div><strong>Testing type: </strong> ${testType}</div>`: '')
     if (locationInfo) {
       details.append(`<div><strong>Location information: </strong> ${locationInfo}</div>`)
     }
