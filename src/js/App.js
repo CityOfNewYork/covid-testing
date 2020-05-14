@@ -68,7 +68,7 @@ class App extends FinderApp {
       geoclientUrl: urls.GEOCLIENT_URL,
       facilityUrl: urls.FACILITY_CSV_URL,
       facilityStyle: style,
-      facilitySearch: { displayField: 'search_label', nameField: 'Full site name' },
+      facilitySearch: { displayField: 'search_label', nameField: 'NAME' },
       facilityFormat: new CsvPoint({
         x: 'X',
         y: 'Y',
