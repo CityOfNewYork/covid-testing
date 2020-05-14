@@ -1,7 +1,12 @@
 import $ from 'jquery'
 
-const TODAY = new Date().toISOString().split('T')[0]
+const NOW_TODAY = new Date()
 
+const today_yyyy = NOW_TODAY.getFullYear().toString()
+const today_mm = (NOW_TODAY.getMonth() + 1).toString().padStart(2, '0')
+const today_dd = NOW_TODAY.getDate().toString().padStart(2, '0')
+
+const TODAY = `${today_yyyy}-${today_mm}-${today_dd}`
 const notOpenYet = []
 
 const decorations = {
