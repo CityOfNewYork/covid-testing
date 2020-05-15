@@ -30,7 +30,7 @@ const optionsWsplash = {
   geoclientUrl: urls.GEOCLIENT_URL,
   facilityUrl: urls.FACILITY_CSV_URL,
   facilityStyle: style,
-  facilitySearch: { displayField: 'search_label', nameField: 'NAME' },
+  facilitySearch: { displayField: 'search_label', nameField: 'search_name' },
   facilityFormat: new CsvPoint({
     x: 'X',
     y: 'Y',
@@ -85,7 +85,7 @@ const optionsWOsplash = {
   geoclientUrl: urls.GEOCLIENT_URL,
   facilityUrl: urls.FACILITY_CSV_URL,
   facilityStyle: style,
-  facilitySearch: { displayField: 'search_label', nameField: 'NAME' },
+  facilitySearch: { displayField: 'search_label', nameField: 'search_name' },
   facilityFormat: new CsvPoint({
     x: 'X',
     y: 'Y',

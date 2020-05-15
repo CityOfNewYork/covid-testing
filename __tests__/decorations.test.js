@@ -36,12 +36,13 @@ beforeEach(() => {
 
 describe('extendFeature', () => {
   test('extendFeature open', () => {
-    expect.assertions(2)
+    expect.assertions(3)
 
     feature.extendFeature()
     expect(decorations.notOpenYet.length).toBe(0)
+    expect(feature.get('search_name')).toBe(`${feature.get('NAME')}, ${feature.getFullAddress()}`)
     expect(feature.get('search_label')).toBe(
-      '<b><span class="srch-lbl-lg">' +  feature.getName() + 
+      '<b><span class="srch-lbl-lg">' +  feature.get('NAME') + 
       '</span></b><br><span class="srch-lbl-sm">' +  feature.getFullAddress() + '</span>'
     )
   })
@@ -65,7 +66,7 @@ test('getFullAddress', () => {
 test('getName', () => {
   expect.assertions(1)
 
-  expect( feature.getName()).toBe('fullSiteName')
+  expect( feature.getName()).toBe('fullSiteName, Address, Borough, NY')
 })
 
 test('getAddress1', () => {

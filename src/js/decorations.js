@@ -17,16 +17,17 @@ const decorations = {
     } else {
       this.set(
         'search_label',
-        '<b><span class="srch-lbl-lg">' + this.getName() + 
+        '<b><span class="srch-lbl-lg">' + this.get('NAME') + 
         '</span></b><br><span class="srch-lbl-sm">' + this.getFullAddress() + '</span>'
       )
+      this.set('search_name', this.getName())
     }
   },
   getFullAddress() {
     return `${this.get('ADDRESS')}, ${this.get('BOROUGH')}, NY`
   },
   getName() {
-    return this.get('NAME')
+    return`${this.get('NAME')}, ${this.getFullAddress()}`
   },
   getAddress1() {
     return this.get('ADDRESS')
