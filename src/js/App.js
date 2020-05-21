@@ -28,7 +28,7 @@ const filters = [{
   ]
   },
   {
-  title: 'Appointment Only',
+  title: 'Appointment Required',
   choices: [
     {name: 'APPOINTMENT_ONLY', values: ['Y'], label: 'Yes', checked: true},
     {name: 'APPOINTMENT_ONLY', values: ['', 'N'], label: 'No', checked: true}

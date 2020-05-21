@@ -62,7 +62,7 @@ const decorations = {
     let info = this.get(prop)
     if (info) {
       info = info.replace(/(https?:\/\/[^\s]+)/g, `<a href="$1">$1</a>`)
-      info = info.replace(/(\([0-9]{3}\) [0-9]{3}-[0-9]{4})+/g, '<a href="tel:$1">$1</a>')
+      info = info.replace(/([0-9]{3}-[0-9]{3}-[0-9]{4})+/g, '<a href="tel:$1">$1</a>')
       return info
     }
   },
@@ -85,20 +85,19 @@ const decorations = {
     const apptOnly = this.get('APPOINTMENT_ONLY') === 'Y' ? 'Yes' : 'No'
     const appointmentInfo =  this.info('APPOINTMENT_INFO')
     const additionalInfo =  this.get('ADDITIONAL_INFO')
-    const startDate = this.get('START_DATE')
     const hours = this.hoursHtml()
 
     const details = $('<div class="detail"></div>')
-      .append(`<div><strong>Start Date: </strong> ${startDate}</div>`)
-      .append(`<div><strong>Appointment Only: </strong> ${apptOnly}</div>`)
-      .append(hours)
+      .append(`<div><strong>Appointment Required: </strong> ${apptOnly}</div>`)
 
     if (appointmentInfo) {
-      details.prepend(`<div><strong>Appointment information:<br></strong> ${appointmentInfo}</div>`)
+      details.append(`<div><strong>Appointment information:<br></strong> ${appointmentInfo}</div>`)
     }
     if (additionalInfo) {
-      details.prepend(`<div><strong>Additional information:<br></strong> ${additionalInfo}</div>`)
+      details.append(`<div><strong>Additional information:<br></strong> ${additionalInfo}</div>`)
     }
+    details.append(hours)
+
     return details
   }
 }

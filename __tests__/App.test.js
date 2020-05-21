@@ -45,7 +45,7 @@ const optionsWsplash = {
     ]
   },
   {
-    title: 'Appointment Only',
+    title: 'Appointment Required',
     choices: [
       {name: 'APPOINTMENT_ONLY', values: ['Y'], label: 'Yes', checked: true},
       {name: 'APPOINTMENT_ONLY', values: ['', 'N'], label: 'No', checked: true}
@@ -77,7 +77,7 @@ const optionsWOsplash = {
     ]
   },
   {
-    title: 'Appointment Only',
+    title: 'Appointment Required',
     choices: [
       {name: 'APPOINTMENT_ONLY', values: ['Y'], label: 'Yes', checked: true},
       {name: 'APPOINTMENT_ONLY', values: ['', 'N'], label: 'No', checked: true}
