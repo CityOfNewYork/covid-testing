@@ -6,20 +6,24 @@ let feature
 
 beforeEach(() => {
   feature = new Feature({
-    NAME: 'fullSiteName',
+    NAME: 'Name',
     ADDRESS: 'Address',
-    BOROUGH: 'Borough',
+    BOROUGH: '1',
     FACILITY_TYPE: 'Type',
-    TESTING_TYPE: 'Testing Type',
-    NYCHA_PRIORITY: 'Y',
-    WALK_IN: 'Y',
-    PRIORITIZATION_CRITERIA: 'Criteria',
     LOCATION_INFO: 'Location info',
-    APPOINTMENT_INFO: 'Location info',
-    DAYS_OF_OPERATION: 'this - that',
-    HOURS_OF_OPERATION: 'now - later',
-    DRIVE_THRU: '',
-    START_DATE: ''
+    APPOINTMENT_INFO: 'Appointment info',
+    ADDITIONAL_INFO: 'Additional info',
+    APPOINTMENT_ONLY: 'N',
+    PHONE: 'XXX-XXX-XXXX',
+    URL: 'http://url',
+    OPERATIONS_MON: 'now - later',
+    OPERATIONS_TUE: 'now - later',
+    OPERATIONS_WED: 'now - later',
+    OPERATIONS_THUR: 'now - later',
+    OPERATIONS_FRI: 'now - later',
+    OPERATIONS_SAT: 'now - later',
+    OPERATIONS_SUN: 'now - later',
+    START_DATE: 'start date'
   })
   decorations.notOpenYet.length = 0
   decorations.decorations.cssClass = jest.fn()
@@ -38,6 +42,7 @@ describe('extendFeature', () => {
   test('extendFeature open', () => {
     expect.assertions(3)
 
+    feature.set('START_DATE', '2020-05-01')
     feature.extendFeature()
     expect(decorations.notOpenYet.length).toBe(0)
     expect(feature.get('search_name')).toBe(`${feature.get('NAME')}, ${feature.getFullAddress()}`)
@@ -57,16 +62,27 @@ describe('extendFeature', () => {
   })
 })
 
+test('getBorough', () => {
+  expect.assertions(5)
+
+  expect(Object.assign(new Feature({BOROUGH: '1'}), decorations.decorations).getBorough()).toBe('Manhattan')
+  expect(Object.assign(new Feature({BOROUGH: '2'}), decorations.decorations).getBorough()).toBe('Bronx')
+  expect(Object.assign(new Feature({BOROUGH: '3'}), decorations.decorations).getBorough()).toBe('Brooklyn')
+  expect(Object.assign(new Feature({BOROUGH: '4'}), decorations.decorations).getBorough()).toBe('Queens')
+  expect(Object.assign(new Feature({BOROUGH: '5'}), decorations.decorations).getBorough()).toBe('Staten Island')
+
+})
+
 test('getFullAddress', () => {
   expect.assertions(1)
 
-  expect( feature.getFullAddress()).toBe('Address, Borough, NY')
+  expect( feature.getFullAddress()).toBe('Address, Manhattan, NY')
 })
 
 test('getName', () => {
   expect.assertions(1)
 
-  expect( feature.getName()).toBe('fullSiteName, Address, Borough, NY')
+  expect( feature.getName()).toBe('Name, Address, Manhattan, NY')
 })
 
 test('getAddress1', () => {
@@ -74,11 +90,22 @@ test('getAddress1', () => {
 
   expect( feature.getAddress1()).toBe('Address')
 })
+test('getAddress2', () => {
+  expect.assertions(1)
+
+  expect( feature.getAddress2()).toBe('Location info')
+})
 
 test('getCityStateZip', () => {
   expect.assertions(1)
 
-  expect( feature.getCityStateZip()).toBe('Borough, NY')
+  expect( feature.getCityStateZip()).toBe('Manhattan, NY')
+})
+
+test('getPhone', () => {
+  expect.assertions(1)
+
+  expect( feature.getPhone()).toBe( feature.get('PHONE'))
 })
 
 test('getTip', () => {
@@ -87,21 +114,46 @@ test('getTip', () => {
   expect( feature.getTip()).toBe( feature.get('search_label'))
 })
 
+test('getWebsite', () => {
+  expect.assertions(1)
+
+  expect( feature.getWebsite()).toBe( feature.get('URL'))
+})
+
+test('hoursHtml', () => {
+  expect.assertions(1)
+
+  const div = $(`<div></div>`)
+  div.html(feature.hoursHtml())
+
+  expect(div.html()).toBe('<div class="op-hours"><table><tr><th>Day</th><th>Hours of Operation</th></tr><tr><td>Monday</td><td>now - later</td></tr><tr><td>Tuesday</td><td>now - later</td></tr><tr><td>Wednesday</td><td>now - later</td></tr><tr><td>Thursday</td><td>now - later</td></tr><tr><td>Friday</td><td>now - later</td></tr><tr><td>Saturday</td><td>now - later</td></tr><tr><td>Sunday</td><td>now - later</td></tr></table></div>')
+})
+
+test('hoursHtml - day w/o hours', () => {
+  expect.assertions(1)
+
+  feature.set('OPERATIONS_WED', '')
+
+  const div = $(`<div class="op-hours"></div>`)
+  div.html(feature.hoursHtml())
+
+  expect(div.html()).toBe('<div class="op-hours"><table><tr><th>Day</th><th>Hours of Operation</th></tr><tr><td>Monday</td><td>now - later</td></tr><tr><td>Tuesday</td><td>now - later</td></tr><tr><td>Wednesday</td><td></td></tr><tr><td>Thursday</td><td>now - later</td></tr><tr><td>Friday</td><td>now - later</td></tr><tr><td>Saturday</td><td>now - later</td></tr><tr><td>Sunday</td><td>now - later</td></tr></table></div>')
+})
+
 test('details', () => {
   expect.assertions(2)
 
   const div = $('<div></div>') 
 
   div.html( feature.detailsHtml())
-  expect(div.html()).toBe('<div class="detail"><div><strong>Open: </strong> this - that, now - later</div><div><strong>Walk up facility: </strong> Yes</div><div><strong>Drive through facility: </strong> No</div><div><strong>NYCHA priority site: </strong> Yes</div><div><strong>Testing type: </strong> Testing Type</div><div><strong>Location information: </strong> Location info</div><div><strong>Appointment information:<br></strong> Location info</div><div><strong>Prioritization criteria:<br></strong> Criteria</div></div>')
+  expect(div.html()).toBe('<div class="detail"><div><strong>Additional information:<br></strong> Additional info</div><div><strong>Appointment information:<br></strong> Appointment info</div><div><strong>Start Date: </strong> start date</div><div><strong>Appointment Only: </strong> No</div><div class="op-hours"><table><tr><th>Day</th><th>Hours of Operation</th></tr><tr><td>Monday</td><td>now - later</td></tr><tr><td>Tuesday</td><td>now - later</td></tr><tr><td>Wednesday</td><td>now - later</td></tr><tr><td>Thursday</td><td>now - later</td></tr><tr><td>Friday</td><td>now - later</td></tr><tr><td>Saturday</td><td>now - later</td></tr><tr><td>Sunday</td><td>now - later</td></tr></table></div></div>')
 
   feature.set('LOCATION_INFO', '')
   feature.set('APPOINTMENT_INFO', '')
-  feature.set('PRIORITIZATION_CRITERIA', '')
-  feature.set('WALK_IN', 'N')
-  feature.set('NYCHA_PRIORITY', 'N')
-  feature.set('DRIVE_THRU', 'Y')
-  feature.set('TESTING_TYPE', '')
+  feature.set('ADDITIONAL_INFO', '')
+  feature.set('APPOINTMENT_ONLY', 'Y')
+
+
   div.html( feature.detailsHtml())
-  expect(div.html()).toBe('<div class="detail"><div><strong>Open: </strong> this - that, now - later</div><div><strong>Walk up facility: </strong> No</div><div><strong>Drive through facility: </strong> Yes</div><div><strong>NYCHA priority site: </strong> No</div></div>')
+  expect(div.html()).toBe('<div class="detail"><div><strong>Start Date: </strong> start date</div><div><strong>Appointment Only: </strong> Yes</div><div class="op-hours"><table><tr><th>Day</th><th>Hours of Operation</th></tr><tr><td>Monday</td><td>now - later</td></tr><tr><td>Tuesday</td><td>now - later</td></tr><tr><td>Wednesday</td><td>now - later</td></tr><tr><td>Thursday</td><td>now - later</td></tr><tr><td>Friday</td><td>now - later</td></tr><tr><td>Saturday</td><td>now - later</td></tr><tr><td>Sunday</td><td>now - later</td></tr></table></div></div>')
 })

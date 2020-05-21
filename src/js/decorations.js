@@ -23,8 +23,17 @@ const decorations = {
       this.set('search_name', this.getName())
     }
   },
+  getBorough() {
+    return {
+      '1': 'Manhattan',
+      '2': 'Bronx',
+      '3': 'Brooklyn',
+      '4': 'Queens',
+      '5': 'Staten Island'
+    }[this.get('BOROUGH')]
+  },
   getFullAddress() {
-    return `${this.get('ADDRESS')}, ${this.get('BOROUGH')}, NY`
+    return `${this.get('ADDRESS')}, ${this.getBorough()}, NY`
   },
   getName() {
     return`${this.get('NAME')}, ${this.getFullAddress()}`
@@ -32,11 +41,20 @@ const decorations = {
   getAddress1() {
     return this.get('ADDRESS')
   },
+  getAddress2() {
+    return this.get('LOCATION_INFO')
+  },
   getCityStateZip() {
-    return `${this.get('BOROUGH')}, NY`
+    return `${this.getBorough()}, NY`
+  },
+  getPhone() {
+    return this.get('PHONE')
   },
   getTip() {
     return this.get('search_label')
+  },
+  getWebsite() {
+    return this.get('URL')
   },
   info(prop) {
     let info = this.get(prop)
@@ -46,28 +64,37 @@ const decorations = {
       return info
     }
   },
+  hoursHtml() {
+    const opHours = $(`<div class="op-hours"></div>`)
+    const tableHtml = $(`<table></table>`)
+    tableHtml.append(`<tr><th>Day</th><th>Hours of Operation</th></tr>`)
+      .append(`<tr><td>Monday</td><td>${this.get('OPERATIONS_MON')}`)
+      .append(`<tr><td>Tuesday</td><td>${this.get('OPERATIONS_TUE')}`)
+      .append(`<tr><td>Wednesday</td><td>${this.get('OPERATIONS_WED')}`)
+      .append(`<tr><td>Thursday</td><td>${this.get('OPERATIONS_THUR')}`)
+      .append(`<tr><td>Friday</td><td>${this.get('OPERATIONS_FRI')}`)
+      .append(`<tr><td>Saturday</td><td>${this.get('OPERATIONS_SAT')}`)
+      .append(`<tr><td>Sunday</td><td>${this.get('OPERATIONS_SUN')}`)
+    opHours.append(tableHtml)
+    return opHours
+  },
   detailsHtml() {
-    const walkIn = this.get('WALK_IN') === 'Y' ? 'Yes' : 'No'
-    const driveTru = this.get('DRIVE_THRU') === 'Y' ? 'Yes' : 'No'
-    const nycha = this.get('NYCHA_PRIORITY') === 'Y' ? 'Yes' : 'No'
-    const locationInfo =  this.info('LOCATION_INFO')
+    const apptOnly = this.get('APPOINTMENT_ONLY') === 'Y' ? 'Yes' : 'No'
     const appointmentInfo =  this.info('APPOINTMENT_INFO')
-    const criterior =  this.info('PRIORITIZATION_CRITERIA')
-    const testType = this.get('TESTING_TYPE')
+    const additionalInfo =  this.get('ADDITIONAL_INFO')
+    const startDate = this.get('START_DATE')
+    const hours = this.hoursHtml()
+
     const details = $('<div class="detail"></div>')
-      .append(`<div><strong>Open: </strong> ${this.get('DAYS_OF_OPERATION')}, ${this.get('HOURS_OF_OPERATION')}</div>`)
-      .append(`<div><strong>Walk up facility: </strong> ${walkIn}</div>`)
-      .append(`<div><strong>Drive through facility: </strong> ${driveTru}</div>`)
-      .append(`<div><strong>NYCHA priority site: </strong> ${nycha}</div>`)
-      .append(testType ? `<div><strong>Testing type: </strong> ${testType}</div>`: '')
-    if (locationInfo) {
-      details.append(`<div><strong>Location information: </strong> ${locationInfo}</div>`)
-    }
+      .append(`<div><strong>Start Date: </strong> ${startDate}</div>`)
+      .append(`<div><strong>Appointment Only: </strong> ${apptOnly}</div>`)
+      .append(hours)
+
     if (appointmentInfo) {
-      details.append(`<div><strong>Appointment information:<br></strong> ${appointmentInfo}</div>`)
+      details.prepend(`<div><strong>Appointment information:<br></strong> ${appointmentInfo}</div>`)
     }
-    if (criterior) {
-      details.append(`<div><strong>Prioritization criteria:<br></strong> ${criterior}</div>`)
+    if (additionalInfo) {
+      details.prepend(`<div><strong>Additional information:<br></strong> ${additionalInfo}</div>`)
     }
     return details
   }

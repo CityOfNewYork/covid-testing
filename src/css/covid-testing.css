@@ -69,3 +69,12 @@ div.route .adp-placemark * {
   width: 129px;
   }
 }
+table, th, td {
+  border: 1px solid black;
+}
+table {
+  margin: auto 0;
+}
+.op-hours {
+  padding-top: 5px;
+}

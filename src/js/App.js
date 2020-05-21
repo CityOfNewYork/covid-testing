@@ -22,47 +22,24 @@ FinderApp.SCREEN_READER_INFO = screenReaderNote + FinderApp.SCREEN_READER_INFO
 const filters = [{
   title: 'Location type',
   choices: [
-    {name: 'FACILITY_TYPE', values: ['H+H community site'], label: 'H+H community site', checked: true},
-    {name: 'FACILITY_TYPE', values: ['H+H Hospital'], label: 'H+H Hospital', checked: true},
-    {name: 'FACILITY_TYPE', values: ['One Medical'], label: 'One Medical', checked: true} //,
-    // {name: 'FACILITY_TYPE', values: ['Antibody survey'], label: 'Antibody survey', checked: true}
+    {name: 'FACILITY_TYPE', values: ['H+H community site'], label: 'H+H Community Site', checked: true},
+    {name: 'FACILITY_TYPE', values: ['H+H hospital'], label: 'H+H Hospital', checked: true},
+    {name: 'FACILITY_TYPE', values: ['One Medical'], label: 'One Medical', checked: true}
   ]
-},
-{
-  title: 'Walk up',
+  },
+  {
+  title: 'Appointment Only',
   choices: [
-    {name: 'WALK_IN', values: ['Y'], label: 'Yes', checked: true},
-    {name: 'WALK_IN', values: ['', 'N'], label: 'No', checked: true}
+    {name: 'APPOINTMENT_ONLY', values: ['Y'], label: 'Yes', checked: true},
+    {name: 'APPOINTMENT_ONLY', values: ['', 'N'], label: 'No', checked: true}
   ]
-},
-{
-  title: 'Drive through',
-  choices: [
-    {name: 'DRIVE_THRU', values: ['Y'], label: 'Yes', checked: true},
-    {name: 'DRIVE_THRU', values: ['', 'N'], label: 'No', checked: true}
-  ]
-},
-/*
-{
-  title: 'Testing type',
-  choices: [
-    {name: 'TESTING_TYPE', values: ['Diagnostic'], label: 'Diagnostic', checked: true},
-    {name: 'TESTING_TYPE', values: ['Antibody'], label: 'Antibody', checked: true}
-  ]
-},
-*/
-{
-  title: 'NYCHA priority site',
-  choices: [
-    {name: 'NYCHA_PRIORITY', values: ['Y'], label: 'Yes', checked: true},
-    {name: 'NYCHA_PRIORITY', values: ['', 'N'], label: 'No', checked: true}
-  ]
-}]
+  },
+]
 
 class App extends FinderApp {
   constructor() {
     super({
-      title: 'COVID-19 Testing Sites',
+      title: 'COVID-19 Diagnostic Testing Sites',
       facilityTabTitle: 'Testing Sites',
       splashOptions: App.getSplashOptions(document.location.search),
       geoclientUrl: urls.GEOCLIENT_URL,
