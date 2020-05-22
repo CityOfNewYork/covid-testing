@@ -85,6 +85,9 @@
   background-color: var(--color-dark);
   color: white;
 }
+#mta * {
+  color: white;
+}
 .translated-rtl .clps .content {
   margin-right: 3px;
 }
