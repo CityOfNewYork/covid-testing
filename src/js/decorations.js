@@ -91,10 +91,14 @@ const decorations = {
       .append(`<div><strong>Appointment Required: </strong> ${apptOnly}</div>`)
 
     if (appointmentInfo) {
-      details.append(`<div><strong>Appointment information:<br></strong> ${appointmentInfo}</div>`)
+      details.append(
+        `<div><strong>Appointment information:</strong>${appointmentInfo.length < 20 ? ' ' : '<br>'}${appointmentInfo}</div>`
+      )
     }
     if (additionalInfo) {
-      details.append(`<div><strong>Additional information:<br></strong> ${additionalInfo}</div>`)
+      details.append(
+        `<div><strong>Additional information:</strong>${additionalInfo.length < 20 ? ' ' : '<br>'}${additionalInfo}</div>`
+      )
     }
     details.append(hours)
 
