@@ -97,11 +97,11 @@
     right: 0;
   }  
 }
-@media only screen and (max-width : 400px) {
+@media only screen and (max-width : 415px) {
   .fnd #banner * {
-    font-size: 17px;
-    line-height: 17px;
-    margin-top: -2px;
+    font-size: 14px;
+    line-height: 16px;
+    margin-top: -3px;
     width: 129px;
   }
 }
