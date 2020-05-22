@@ -25,6 +25,16 @@ const decorations = {
       this.set('search_name', this.getName())
     }
   },
+  cssClass() {
+    const phone = this.getPhone()
+    const website = this.getWebsite()
+    if (phone && !website) {
+      return 'no-website'
+    }
+    if (!phone && website) {
+      return 'no-phone'
+    }
+  },
   getBorough() {
     return {
       '1': 'Manhattan',
