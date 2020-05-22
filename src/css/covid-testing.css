@@ -77,6 +77,15 @@
 #mode td .btn-sq.active {
   background-color: #F68C1E;
 }
+.fnd.translated .splash .btn {
+  text-align: center !important;
+}
+.fnd.translated .splash .btn * {
+  color: var(--color-dark);
+}
+.fnd.translated .splash .btn:hover * {
+  color: var(--color-light);
+}
 @media only screen and (max-width: 750px), screen and (max-device-height: 350px) {
   .fnd .lst-srch .srch {
     display: block;
