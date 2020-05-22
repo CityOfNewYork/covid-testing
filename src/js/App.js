@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import urls from './urls'
 import style from './style'
 import decorations from './decorations'
