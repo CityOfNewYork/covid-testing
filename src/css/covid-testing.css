@@ -47,6 +47,20 @@ div.route .adp-placemark * {
 .splash p {
   margin: 5px 0;
 }
+.dtl table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.dtl th, .dtl td {
+  border: 1px solid var(--color-dark-translucent);
+  padding: 2px 3px;
+}
+.dtl .hrs {
+  text-align: right;
+}
+.op-hours {
+  padding-top: 5px;
+}
 @media only screen and (max-width: 750px), screen and (max-device-height: 350px) {
   .fnd .lst-srch .srch {
     display: block;
@@ -68,13 +82,4 @@ div.route .adp-placemark * {
   margin-top: -2px;
   width: 129px;
   }
-}
-table, th, td {
-  border: 1px solid black;
-}
-table {
-  margin: auto 0;
-}
-.op-hours {
-  padding-top: 5px;
 }

@@ -9,6 +9,8 @@ const today_dd = NOW_TODAY.getDate().toString().padStart(2, '0')
 const TODAY = `${today_yyyy}-${today_mm}-${today_dd}`
 const notOpenYet = []
 
+const HOURS_HTML = '<div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody></tbody></table></div>'
+
 const decorations = {
   extendFeature() {
     const start = this.get('START_DATE')
@@ -65,17 +67,15 @@ const decorations = {
     }
   },
   hoursHtml() {
-    const opHours = $(`<div class="op-hours"></div>`)
-    const tableHtml = $(`<table></table>`)
-    tableHtml.append(`<tr><th>Day</th><th>Hours of Operation</th></tr>`)
-      .append(`<tr><td>Monday</td><td>${this.get('OPERATIONS_MON')}`)
-      .append(`<tr><td>Tuesday</td><td>${this.get('OPERATIONS_TUE')}`)
-      .append(`<tr><td>Wednesday</td><td>${this.get('OPERATIONS_WED')}`)
-      .append(`<tr><td>Thursday</td><td>${this.get('OPERATIONS_THUR')}`)
-      .append(`<tr><td>Friday</td><td>${this.get('OPERATIONS_FRI')}`)
-      .append(`<tr><td>Saturday</td><td>${this.get('OPERATIONS_SAT')}`)
-      .append(`<tr><td>Sunday</td><td>${this.get('OPERATIONS_SUN')}`)
-    opHours.append(tableHtml)
+    const opHours = $(HOURS_HTML)
+    opHours.find('tbody')
+      .append(`<tr><td class="day">Monday</td><td class="hrs">${this.get('OPERATIONS_MON')}`)
+      .append(`<tr><td class="day">Tuesday</td><td class="hrs">${this.get('OPERATIONS_TUE')}`)
+      .append(`<tr><td class="day">Wednesday</td><td class="hrs">${this.get('OPERATIONS_WED')}`)
+      .append(`<tr><td class="day">Thursday</td><td class="hrs">${this.get('OPERATIONS_THUR')}`)
+      .append(`<tr><td class="day">Friday</td><td class="hrs">${this.get('OPERATIONS_FRI')}`)
+      .append(`<tr><td class="day">Saturday</td><td class="hrs">${this.get('OPERATIONS_SAT')}`)
+      .append(`<tr><td class="day">Sunday</td><td class="hrs">${this.get('OPERATIONS_SUN')}`)
     return opHours
   },
   detailsHtml() {

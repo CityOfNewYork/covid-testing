@@ -126,7 +126,7 @@ test('hoursHtml', () => {
   const div = $(`<div></div>`)
   div.html(feature.hoursHtml())
 
-  expect(div.html()).toBe('<div class="op-hours"><table><tr><th>Day</th><th>Hours of Operation</th></tr><tr><td>Monday</td><td>now - later</td></tr><tr><td>Tuesday</td><td>now - later</td></tr><tr><td>Wednesday</td><td>now - later</td></tr><tr><td>Thursday</td><td>now - later</td></tr><tr><td>Friday</td><td>now - later</td></tr><tr><td>Saturday</td><td>now - later</td></tr><tr><td>Sunday</td><td>now - later</td></tr></table></div>')
+  expect(div.html()).toBe('<div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs">now - later</td></tr></tbody></table></div>')
 })
 
 test('hoursHtml - day w/o hours', () => {
@@ -137,7 +137,7 @@ test('hoursHtml - day w/o hours', () => {
   const div = $(`<div class="op-hours"></div>`)
   div.html(feature.hoursHtml())
 
-  expect(div.html()).toBe('<div class="op-hours"><table><tr><th>Day</th><th>Hours of Operation</th></tr><tr><td>Monday</td><td>now - later</td></tr><tr><td>Tuesday</td><td>now - later</td></tr><tr><td>Wednesday</td><td></td></tr><tr><td>Thursday</td><td>now - later</td></tr><tr><td>Friday</td><td>now - later</td></tr><tr><td>Saturday</td><td>now - later</td></tr><tr><td>Sunday</td><td>now - later</td></tr></table></div>')
+  expect(div.html()).toBe('<div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs"></td></tr><tr><td class="day">Thursday</td><td class="hrs">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs">now - later</td></tr></tbody></table></div>')
 })
 
 test('details', () => {
@@ -146,7 +146,7 @@ test('details', () => {
   const div = $('<div></div>') 
 
   div.html( feature.detailsHtml())
-  expect(div.html()).toBe('<div class="detail"><div><strong>Additional information:<br></strong> Additional info</div><div><strong>Appointment information:<br></strong> Appointment info</div><div><strong>Start Date: </strong> start date</div><div><strong>Appointment Only: </strong> No</div><div class="op-hours"><table><tr><th>Day</th><th>Hours of Operation</th></tr><tr><td>Monday</td><td>now - later</td></tr><tr><td>Tuesday</td><td>now - later</td></tr><tr><td>Wednesday</td><td>now - later</td></tr><tr><td>Thursday</td><td>now - later</td></tr><tr><td>Friday</td><td>now - later</td></tr><tr><td>Saturday</td><td>now - later</td></tr><tr><td>Sunday</td><td>now - later</td></tr></table></div></div>')
+  expect(div.html()).toBe('<div class="detail"><div><strong>Additional information:<br></strong> Additional info</div><div><strong>Appointment information:<br></strong> Appointment info</div><div><strong>Start Date: </strong> start date</div><div><strong>Appointment Only: </strong> No</div><div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs">now - later</td></tr></tbody></table></div></div>')
 
   feature.set('LOCATION_INFO', '')
   feature.set('APPOINTMENT_INFO', '')
@@ -155,5 +155,5 @@ test('details', () => {
 
 
   div.html( feature.detailsHtml())
-  expect(div.html()).toBe('<div class="detail"><div><strong>Start Date: </strong> start date</div><div><strong>Appointment Only: </strong> Yes</div><div class="op-hours"><table><tr><th>Day</th><th>Hours of Operation</th></tr><tr><td>Monday</td><td>now - later</td></tr><tr><td>Tuesday</td><td>now - later</td></tr><tr><td>Wednesday</td><td>now - later</td></tr><tr><td>Thursday</td><td>now - later</td></tr><tr><td>Friday</td><td>now - later</td></tr><tr><td>Saturday</td><td>now - later</td></tr><tr><td>Sunday</td><td>now - later</td></tr></table></div></div>')
+  expect(div.html()).toBe('<div class="detail"><div><strong>Start Date: </strong> start date</div><div><strong>Appointment Only: </strong> Yes</div><div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs">now - later</td></tr></tbody></table></div></div>')
 })
