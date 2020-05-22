@@ -80,9 +80,11 @@ test('getFullAddress', () => {
 })
 
 test('getName', () => {
-  expect.assertions(1)
-
+  expect.assertions(2)
   expect( feature.getName()).toBe('Name')
+
+  feature.set('FACILITY_TYPE', 'CityMD')
+  expect( feature.getName()).toBe('CityMD/Name')
 })
 
 test('getAddress1', () => {
