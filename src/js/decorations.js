@@ -72,13 +72,13 @@ const decorations = {
   hoursHtml() {
     const opHours = $(HOURS_HTML)
     opHours.find('tbody')
-      .append(`<tr><td class="day">Monday</td><td class="hrs">${this.hours('OPERATIONS_MON')}`)
-      .append(`<tr><td class="day">Tuesday</td><td class="hrs">${this.hours('OPERATIONS_TUE')}`)
-      .append(`<tr><td class="day">Wednesday</td><td class="hrs">${this.hours('OPERATIONS_WED')}`)
-      .append(`<tr><td class="day">Thursday</td><td class="hrs">${this.hours('OPERATIONS_THUR')}`)
-      .append(`<tr><td class="day">Friday</td><td class="hrs">${this.hours('OPERATIONS_FRI')}`)
-      .append(`<tr><td class="day">Saturday</td><td class="hrs">${this.hours('OPERATIONS_SAT')}`)
-      .append(`<tr><td class="day">Sunday</td><td class="hrs">${this.hours('OPERATIONS_SUN')}`)
+      .append(`<tr><td class="day">Monday</td><td class="hrs notranslate">${this.hours('OPERATIONS_MON')}`)
+      .append(`<tr><td class="day">Tuesday</td><td class="hrs notranslate">${this.hours('OPERATIONS_TUE')}`)
+      .append(`<tr><td class="day">Wednesday</td><td class="hrs notranslate">${this.hours('OPERATIONS_WED')}`)
+      .append(`<tr><td class="day">Thursday</td><td class="hrs notranslate">${this.hours('OPERATIONS_THUR')}`)
+      .append(`<tr><td class="day">Friday</td><td class="hrs notranslate">${this.hours('OPERATIONS_FRI')}`)
+      .append(`<tr><td class="day">Saturday</td><td class="hrs notranslate">${this.hours('OPERATIONS_SAT')}`)
+      .append(`<tr><td class="day">Sunday</td><td class="hrs notranslate">${this.hours('OPERATIONS_SUN')}`)
     return opHours
   },
   detailsHtml() {
