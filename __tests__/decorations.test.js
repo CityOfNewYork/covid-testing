@@ -137,7 +137,7 @@ test('hoursHtml - day w/o hours', () => {
   const div = $(`<div class="op-hours"></div>`)
   div.html(feature.hoursHtml())
 
-  expect(div.html()).toBe('<div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs"></td></tr><tr><td class="day">Thursday</td><td class="hrs">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs">now - later</td></tr></tbody></table></div>')
+  expect(div.html()).toBe('<div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs">Closed</td></tr><tr><td class="day">Thursday</td><td class="hrs">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs">now - later</td></tr></tbody></table></div>')
 })
 
 test('details', () => {
