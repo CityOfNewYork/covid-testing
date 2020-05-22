@@ -24,7 +24,8 @@ const filters = [{
   choices: [
     {name: 'FACILITY_TYPE', values: ['H+H community site'], label: 'H+H Community Site', checked: true},
     {name: 'FACILITY_TYPE', values: ['H+H hospital'], label: 'H+H Hospital', checked: true},
-    {name: 'FACILITY_TYPE', values: ['One Medical'], label: 'One Medical', checked: true}
+    {name: 'FACILITY_TYPE', values: ['One Medical'], label: 'One Medical', checked: true},
+    {name: 'FACILITY_TYPE', values: ['CityMD'], label: 'CityMD', checked: true}
   ]
   },
   {

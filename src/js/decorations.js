@@ -19,7 +19,7 @@ const decorations = {
     } else {
       this.set(
         'search_label',
-        '<b><span class="srch-lbl-lg">' + this.get('NAME') + 
+        '<b><span class="srch-lbl-lg">' + this.getName() + 
         '</span></b><br><span class="srch-lbl-sm">' + this.getFullAddress() + '</span>'
       )
       this.set('search_name', this.getName())
@@ -38,7 +38,7 @@ const decorations = {
     return `${this.get('ADDRESS')}, ${this.getBorough()}, NY`
   },
   getName() {
-    return this.get('NAME')
+    return `${this.get('FACILITY_TYPE') === 'CityMD' ? 'CityMD/' : ''}${this.get('NAME')}`
   },
   getAddress1() {
     return this.get('ADDRESS')

@@ -45,9 +45,9 @@ describe('extendFeature', () => {
     feature.set('START_DATE', '2020-05-01')
     feature.extendFeature()
     expect(decorations.notOpenYet.length).toBe(0)
-    expect(feature.get('search_name')).toBe(feature.get('NAME'))
+    expect(feature.get('search_name')).toBe(feature.getName())
     expect(feature.get('search_label')).toBe(
-      '<b><span class="srch-lbl-lg">' +  feature.get('NAME') + 
+      '<b><span class="srch-lbl-lg">' +  feature.getName() + 
       '</span></b><br><span class="srch-lbl-sm">' +  feature.getFullAddress() + '</span>'
     )
   })
@@ -80,9 +80,11 @@ test('getFullAddress', () => {
 })
 
 test('getName', () => {
-  expect.assertions(1)
-
+  expect.assertions(2)
   expect( feature.getName()).toBe('Name')
+
+  feature.set('FACILITY_TYPE', 'CityMD')
+  expect( feature.getName()).toBe('CityMD/Name')
 })
 
 test('getAddress1', () => {
