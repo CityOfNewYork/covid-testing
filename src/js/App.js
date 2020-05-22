@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import urls from './urls'
 import style from './style'
 import decorations from './decorations'
@@ -8,8 +9,7 @@ import {extend, getWidth} from 'ol/extent'
 
 const screenReaderNote = `<h1 style="color:red">Important</h1>
 <p style="color:red">
-  The following instructions are meant for people with disabilities who use assistive technology.
-  For all other inquiries please contact <a style="color:red" href="tel:311">311</a>.<br>
+  The following instructions are meant for people with disabilities who use assistive technology.<br>
 </p>
 <p style="text-align:center">
   <a class="btn rad-all btn-ok" href="javascript:$('.screen-reader-info .btn.rad-all.btn-ok').click()" style="display: inline-block;">
@@ -46,7 +46,7 @@ class App extends FinderApp {
       geoclientUrl: urls.GEOCLIENT_URL,
       facilityUrl: urls.FACILITY_CSV_URL,
       facilityStyle: style,
-      facilitySearch: { displayField: 'search_label', nameField: 'search_name' },
+      facilitySearch: { displayField: 'search_label', nameField: 'search_name', placeholder: 'Search for a location near you...' },
       facilityFormat: new CsvPoint({
         x: 'X',
         y: 'Y',
@@ -83,16 +83,8 @@ class App extends FinderApp {
 
 const message = `<h1>COVID-19 Diagnostic Testing</h1>
   <p>
-    Diagnostic testing is only recommended for those who are symptomatic or have a history of symptoms of COVID-19
-    (e.g. fever, cough, and/or trouble breathing), particularly if the individual is 65 years of age or older,
-    the individual has a compromised immune system, or the individual has an underlying health condition. Diagnostic
-    testing locations can be found on this locator map. To participate in the City of New York’s free antibody testing survey,
-    please call
-  </p>
-  <p><a class="btn rad-all" href="tel:1-888-279-0967">(888) 279-0967</a></p>
-  <p>or visit</p>
-  <p><a class="btn rad-all" href="https://on.nyc.gov/antibody">on.nyc.gov/antibody<a></p>
-  <p>for more information.</p>`
+  New COVID testing sites are open in New York City.  Safe, simple, and easy.  Get tested at any of our convenient locations today.
+  </p>`
 
 App.getSplashOptions = search => {
   if (search.indexOf('splash=false') === -1) {

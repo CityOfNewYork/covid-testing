@@ -52,11 +52,6 @@
 .fnd .splash .dia a.btn-no {
   width: calc(100% - 6px);
 }
-.fnd .splash .dia {
-  top: 36px;
-  max-height: calc(100% - 55px);
-  overflow-y: auto;
-}
 .splash p {
   margin: 5px 0;
 }
