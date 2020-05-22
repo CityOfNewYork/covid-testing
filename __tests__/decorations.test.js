@@ -159,3 +159,11 @@ test('details', () => {
   div.html( feature.detailsHtml())
   expect(div.html()).toBe('<div class="detail"><div><strong>Appointment Required: </strong> Yes</div><div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs">now - later</td></tr></tbody></table></div></div>')
 })
+
+test('details - info more than 20 characters', () => {
+  const div = $('<div></div>') 
+  feature.set('APPOINTMENT_INFO', 'Lots of text that is more than 20 characters')
+  feature.set('ADDITIONAL_INFO', 'Lots of text that is more than 20 characters')
+  div.html( feature.detailsHtml())
+  expect(div.html()).toBe('<div class="detail"><div><strong>Appointment Required: </strong> No</div><div><strong>Appointment information:</strong><br>Lots of text that is more than 20 characters</div><div><strong>Additional information:</strong><br>Lots of text that is more than 20 characters</div><div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs">now - later</td></tr></tbody></table></div></div>')
+})
