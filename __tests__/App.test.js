@@ -24,27 +24,29 @@ const optionsWsplash = {
   facilityStyle: style,
   facilitySearch: { displayField: 'search_label', nameField: 'search_name', placeholder: 'Search for a location near you...' },
   facilityFormat: new CsvPoint({
-    x: 'X',
-    y: 'Y',
-    dataProjection: 'EPSG:2263'
+    x: 'longitude',
+    y: 'latitude',
+    dataProjection: 'EPSG:4326'
   }),
-  filterChoiceOptions: [{
-    title: 'Location type',
-    choices: [
-      {name: 'FACILITY_TYPE', values: ['H+H community site'], label: 'H+H Community Site', checked: true},
-      {name: 'FACILITY_TYPE', values: ['H+H hospital'], label: 'H+H Hospital', checked: true},
-      {name: 'FACILITY_TYPE', values: ['One Medical'], label: 'One Medical', checked: true},
-      {name: 'FACILITY_TYPE', values: ['CityMD'], label: 'CityMD', checked: true}
-    ]
-  },
-  {
-    title: 'Appointment Required',
-    choices: [
-      {name: 'APPOINTMENT_ONLY', values: ['Y'], label: 'Yes', checked: true},
-      {name: 'APPOINTMENT_ONLY', values: ['', 'N'], label: 'No', checked: true}
-    ]
-  },
-],
+  filterChoiceOptions: [
+    {
+      title: 'Location type',
+      choices: [
+        {name: 'type_of_center', values: ['Walk up only'], label: 'Walk up only', checked: true},
+        {name: 'type_of_center', values: ['Urgent Care Clinic'], label: 'Urgent Care Clinic', checked: true},
+        {name: 'type_of_center', values: ['Pharmacy Clinic'], label: 'Pharmacy Clinic', checked: true},
+        {name: 'type_of_center', values: ['Hospital'], label: 'Hospital', checked: true},
+        {name: 'type_of_center', values: [''], label: 'Other', checked: true}
+      ]
+    },
+    {
+      title: 'Appointment Required',
+      choices: [
+        {name: 'appointment_required', values: ['Y'], label: 'Yes', checked: true},
+        {name: 'appointment_required', values: ['', 'N'], label: 'No', checked: true}
+      ]
+    }
+  ],
   decorations: [decorations.decorations],
   directionsUrl: urls.DIRECTIONS_URL
 }
@@ -57,28 +59,29 @@ const optionsWOsplash = {
   facilityStyle: style,
   facilitySearch: { displayField: 'search_label', nameField: 'search_name', placeholder: 'Search for a location near you...' },
   facilityFormat: new CsvPoint({
-    x: 'X',
-    y: 'Y',
-    dataProjection: 'EPSG:2263'
+    x: 'longitude',
+    y: 'latitude',
+    dataProjection: 'EPSG:4326'
   }),
-  filterChoiceOptions: [{
-    title: 'Location type',
-    choices: [
-      {name: 'FACILITY_TYPE', values: ['H+H community site'], label: 'H+H Community Site', checked: true},
-      {name: 'FACILITY_TYPE', values: ['H+H hospital'], label: 'H+H Hospital', checked: true},
-      {name: 'FACILITY_TYPE', values: ['One Medical'], label: 'One Medical', checked: true},
-      {name: 'FACILITY_TYPE', values: ['CityMD'], label: 'CityMD', checked: true}
-    ]
-  },
-  {
-    title: 'Appointment Required',
-    choices: [
-      {name: 'APPOINTMENT_ONLY', values: ['Y'], label: 'Yes', checked: true},
-      {name: 'APPOINTMENT_ONLY', values: ['', 'N'], label: 'No', checked: true}
-    ]
-  },
-
-],
+  filterChoiceOptions: [
+    {
+      title: 'Location type',
+      choices: [
+        {name: 'type_of_center', values: ['Walk up only'], label: 'Walk up only', checked: true},
+        {name: 'type_of_center', values: ['Urgent Care Clinic'], label: 'Urgent Care Clinic', checked: true},
+        {name: 'type_of_center', values: ['Pharmacy Clinic'], label: 'Pharmacy Clinic', checked: true},
+        {name: 'type_of_center', values: ['Hospital'], label: 'Hospital', checked: true},
+        {name: 'type_of_center', values: [''], label: 'Other', checked: true}
+      ]
+    },
+    {
+      title: 'Appointment Required',
+      choices: [
+        {name: 'appointment_required', values: ['Y'], label: 'Yes', checked: true},
+        {name: 'appointment_required', values: ['', 'N'], label: 'No', checked: true}
+      ]
+    }
+  ],
   decorations: [decorations.decorations],
   directionsUrl: urls.DIRECTIONS_URL
 }

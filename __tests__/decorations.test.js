@@ -6,24 +6,23 @@ let feature
 
 beforeEach(() => {
   feature = new Feature({
-    NAME: 'Name',
-    ADDRESS: 'Address',
-    BOROUGH: '1',
-    FACILITY_TYPE: 'Type',
-    LOCATION_INFO: 'Location info',
-    APPOINTMENT_INFO: 'Appointment info',
-    ADDITIONAL_INFO: 'Additional info',
-    APPOINTMENT_ONLY: 'N',
-    PHONE: 'XXX-XXX-XXXX',
-    URL: 'http://url',
-    OPERATIONS_MON: 'now - later',
-    OPERATIONS_TUE: 'now - later',
-    OPERATIONS_WED: 'now - later',
-    OPERATIONS_THUR: 'now - later',
-    OPERATIONS_FRI: 'now - later',
-    OPERATIONS_SAT: 'now - later',
-    OPERATIONS_SUN: 'now - later',
-    START_DATE: 'start date'
+    site_name: 'Name',
+    address: 'Address',
+    city: 'bedrock',
+    state: 'anxiety',
+    zip_code: '11111',
+    type_of_center: 'Type',
+    appointment_required: 'N',
+    phone_number: 'XXX-XXX-XXXX',
+    provider_url: 'http://url',
+    monday: 'now - later',
+    tuesday: 'now - later',
+    wednesday: 'now - later',
+    thursday: 'now - later',
+    friday: 'now - later',
+    saturday: 'now - later',
+    sunday: 'now - later',
+    open_date: 'start date'
   })
   decorations.notOpenYet.length = 0
   decorations.decorations.cssClass = jest.fn()
@@ -42,7 +41,7 @@ describe('extendFeature', () => {
   test('extendFeature open', () => {
     expect.assertions(3)
 
-    feature.set('START_DATE', '2020-05-01')
+    feature.set('open_date', '2020-05-01')
     feature.extendFeature()
     expect(decorations.notOpenYet.length).toBe(0)
     expect(feature.get('search_name')).toBe(feature.getName())
@@ -54,7 +53,7 @@ describe('extendFeature', () => {
   test('extendFeature not open yet', () => {
     expect.assertions(3)
 
-    feature.set('START_DATE', '5000-01-01')
+    feature.set('open_date', '5000-01-01')
     feature.extendFeature()
     expect(decorations.notOpenYet.length).toBe(1)
     expect(decorations.notOpenYet[0]).toBe(feature)
@@ -62,29 +61,15 @@ describe('extendFeature', () => {
   })
 })
 
-test('getBorough', () => {
-  expect.assertions(5)
-
-  expect(Object.assign(new Feature({BOROUGH: '1'}), decorations.decorations).getBorough()).toBe('Manhattan')
-  expect(Object.assign(new Feature({BOROUGH: '2'}), decorations.decorations).getBorough()).toBe('Bronx')
-  expect(Object.assign(new Feature({BOROUGH: '3'}), decorations.decorations).getBorough()).toBe('Brooklyn')
-  expect(Object.assign(new Feature({BOROUGH: '4'}), decorations.decorations).getBorough()).toBe('Queens')
-  expect(Object.assign(new Feature({BOROUGH: '5'}), decorations.decorations).getBorough()).toBe('Staten Island')
-
-})
-
 test('getFullAddress', () => {
   expect.assertions(1)
 
-  expect( feature.getFullAddress()).toBe('Address, Manhattan, NY')
+  expect( feature.getFullAddress()).toBe('Address, bedrock, anxiety 11111')
 })
 
 test('getName', () => {
-  expect.assertions(2)
+  expect.assertions(1)
   expect( feature.getName()).toBe('Name')
-
-  feature.set('FACILITY_TYPE', 'CityMD')
-  expect( feature.getName()).toBe('CityMD/Name')
 })
 
 test('getAddress1', () => {
@@ -92,22 +77,17 @@ test('getAddress1', () => {
 
   expect( feature.getAddress1()).toBe('Address')
 })
-test('getAddress2', () => {
-  expect.assertions(1)
-
-  expect( feature.getAddress2()).toBe('Location info')
-})
 
 test('getCityStateZip', () => {
   expect.assertions(1)
 
-  expect( feature.getCityStateZip()).toBe('Manhattan, NY')
+  expect( feature.getCityStateZip()).toBe('bedrock, anxiety 11111')
 })
 
 test('getPhone', () => {
   expect.assertions(1)
 
-  expect( feature.getPhone()).toBe( feature.get('PHONE'))
+  expect( feature.getPhone()).toBe( feature.get('phone_number'))
 })
 
 test('getTip', () => {
@@ -119,7 +99,7 @@ test('getTip', () => {
 test('getWebsite', () => {
   expect.assertions(1)
 
-  expect( feature.getWebsite()).toBe( feature.get('URL'))
+  expect( feature.getWebsite()).toBe( feature.get('provider_url'))
 })
 
 test('hoursHtml', () => {
@@ -139,7 +119,7 @@ test('hoursHtml - day w/o hours', () => {
   const div = $(`<div class="op-hours"></div>`)
   div.html(feature.hoursHtml())
 
-  expect(div.html()).toBe('<div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs notranslate">Closed</td></tr><tr><td class="day">Thursday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs notranslate">now - later</td></tr></tbody></table></div>')
+  expect(div.html()).toBe('<div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs notranslate">now - later</td></tr></tbody></table></div>')
 })
 
 test('details', () => {
@@ -147,23 +127,12 @@ test('details', () => {
 
   const div = $('<div></div>') 
 
-  div.html( feature.detailsHtml())
-  expect(div.html()).toBe('<div class="detail"><div><strong>Appointment Required: </strong> No</div><div><strong>Appointment information:</strong> Appointment info</div><div><strong>Additional information:</strong> Additional info</div><div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs notranslate">now - later</td></tr></tbody></table></div></div>')
+  div.html(feature.detailsHtml())
+  expect(div.html()).toBe('<div class="detail"><div><strong>Appointment Required: </strong>No</div><div><strong>Physician order required: </strong>No</div><div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs notranslate">now - later</td></tr></tbody></table></div></div>')
 
-  feature.set('LOCATION_INFO', '')
-  feature.set('APPOINTMENT_INFO', '')
-  feature.set('ADDITIONAL_INFO', '')
-  feature.set('APPOINTMENT_ONLY', 'Y')
+  feature.set('appointment_required', 'Y')
 
 
   div.html( feature.detailsHtml())
-  expect(div.html()).toBe('<div class="detail"><div><strong>Appointment Required: </strong> Yes</div><div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs notranslate">now - later</td></tr></tbody></table></div></div>')
-})
-
-test('details - info more than 20 characters', () => {
-  const div = $('<div></div>') 
-  feature.set('APPOINTMENT_INFO', 'Lots of text that is more than 20 characters')
-  feature.set('ADDITIONAL_INFO', 'Lots of text that is more than 20 characters')
-  div.html( feature.detailsHtml())
-  expect(div.html()).toBe('<div class="detail"><div><strong>Appointment Required: </strong> No</div><div><strong>Appointment information:</strong><br>Lots of text that is more than 20 characters</div><div><strong>Additional information:</strong><br>Lots of text that is more than 20 characters</div><div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs notranslate">now - later</td></tr></tbody></table></div></div>')
+  expect(div.html()).toBe('<div class="detail"><div><strong>Appointment Required: </strong>Yes</div><div><strong>Physician order required: </strong>No</div><div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs notranslate">now - later</td></tr></tbody></table></div></div>')
 })

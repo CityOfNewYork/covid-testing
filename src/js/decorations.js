@@ -11,9 +11,18 @@ const notOpenYet = []
 
 const HOURS_HTML = '<div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody></tbody></table></div>'
 
+
+//flag,unique_id,id,site_name,state,county,
+// address,city,zip_code,phone_number,testing_status,appointment_required,
+// physician_order_required,screening_required,restrictions_apply,restriction_details,
+// type_of_center,rapid_testing,non_rapid_testing,guidelines,provider_url,antibody_testing,
+// monday,tuesday,wednesday,thursday,friday,saturday,sunday,latitude,longitude,cost_of_test,open_date,
+// close_date,minimum_age
+
+
 const decorations = {
   extendFeature() {
-    const start = this.get('START_DATE')
+    const start = this.get('open_date')
     if (start > TODAY) {
       notOpenYet.push(this)
     } else {
@@ -25,46 +34,35 @@ const decorations = {
       this.set('search_name', this.getName())
     }
   },
-  getBorough() {
-    return {
-      '1': 'Manhattan',
-      '2': 'Bronx',
-      '3': 'Brooklyn',
-      '4': 'Queens',
-      '5': 'Staten Island'
-    }[this.get('BOROUGH')]
+  getCity() {
+    return this.get('city')
+  },
+  getState() {
+    return this.get('state')
+  },
+  getZip() {
+    return this.get('zip_code')
   },
   getFullAddress() {
-    return `${this.get('ADDRESS')}, ${this.getBorough()}, NY`
+    return `${this.getAddress1()}, ${this.getCityStateZip()}`
   },
   getName() {
-    return `${this.get('FACILITY_TYPE') === 'CityMD' ? 'CityMD/' : ''}${this.get('NAME')}`
+    return this.get('site_name')
   },
   getAddress1() {
-    return this.get('ADDRESS')
-  },
-  getAddress2() {
-    return this.get('LOCATION_INFO')
+    return this.get('address')
   },
   getCityStateZip() {
-    return `${this.getBorough()}, NY`
+    return `${this.getCity()}, ${this.getState()} ${this.getZip()}`
   },
   getPhone() {
-    return this.get('PHONE')
+    return this.get('phone_number')
   },
   getTip() {
     return this.get('search_label')
   },
   getWebsite() {
-    return this.get('URL')
-  },
-  info(prop) {
-    let info = this.get(prop)
-    if (info) {
-      info = info.replace(/(https?:\/\/[^\s]+)/g, `<a href="$1">$1</a>`)
-      info = info.replace(/([0-9]{3}-[0-9]{3}-[0-9]{4})+/g, '<a href="tel:$1">$1</a>')
-      return info
-    }
+    return this.get('provider_url')
   },
   hours(day) {
     return this.get(day) || 'Closed'
@@ -72,34 +70,24 @@ const decorations = {
   hoursHtml() {
     const opHours = $(HOURS_HTML)
     opHours.find('tbody')
-      .append(`<tr><td class="day">Monday</td><td class="hrs notranslate">${this.hours('OPERATIONS_MON')}`)
-      .append(`<tr><td class="day">Tuesday</td><td class="hrs notranslate">${this.hours('OPERATIONS_TUE')}`)
-      .append(`<tr><td class="day">Wednesday</td><td class="hrs notranslate">${this.hours('OPERATIONS_WED')}`)
-      .append(`<tr><td class="day">Thursday</td><td class="hrs notranslate">${this.hours('OPERATIONS_THUR')}`)
-      .append(`<tr><td class="day">Friday</td><td class="hrs notranslate">${this.hours('OPERATIONS_FRI')}`)
-      .append(`<tr><td class="day">Saturday</td><td class="hrs notranslate">${this.hours('OPERATIONS_SAT')}`)
-      .append(`<tr><td class="day">Sunday</td><td class="hrs notranslate">${this.hours('OPERATIONS_SUN')}`)
+      .append(`<tr><td class="day">Monday</td><td class="hrs notranslate">${this.hours('monday')}`)
+      .append(`<tr><td class="day">Tuesday</td><td class="hrs notranslate">${this.hours('tuesday')}`)
+      .append(`<tr><td class="day">Wednesday</td><td class="hrs notranslate">${this.hours('wednesday')}`)
+      .append(`<tr><td class="day">Thursday</td><td class="hrs notranslate">${this.hours('thursday')}`)
+      .append(`<tr><td class="day">Friday</td><td class="hrs notranslate">${this.hours('friday')}`)
+      .append(`<tr><td class="day">Saturday</td><td class="hrs notranslate">${this.hours('saturday')}`)
+      .append(`<tr><td class="day">Sunday</td><td class="hrs notranslate">${this.hours('sunday')}`)
     return opHours
   },
   detailsHtml() {
-    const apptOnly = this.get('APPOINTMENT_ONLY') === 'Y' ? 'Yes' : 'No'
-    const appointmentInfo =  this.info('APPOINTMENT_INFO')
-    const additionalInfo =  this.get('ADDITIONAL_INFO')
+    const apptOnly = this.get('appointment_required') === 'Y' ? 'Yes' : 'No'
+    const referralReq = this.get('physician_order_required') === 'Y' ? 'Yes' : 'No'
+
     const hours = this.hoursHtml()
 
     const details = $('<div class="detail"></div>')
-      .append(`<div><strong>Appointment Required: </strong> ${apptOnly}</div>`)
-
-    if (appointmentInfo) {
-      details.append(
-        `<div><strong>Appointment information:</strong>${appointmentInfo.length < 20 ? ' ' : '<br>'}${appointmentInfo}</div>`
-      )
-    }
-    if (additionalInfo) {
-      details.append(
-        `<div><strong>Additional information:</strong>${additionalInfo.length < 20 ? ' ' : '<br>'}${additionalInfo}</div>`
-      )
-    }
+      .append(`<div><strong>Appointment Required: </strong>${apptOnly}</div>`)
+      .append(`<div><strong>Physician order required: </strong>${referralReq}</div>`)
     details.append(hours)
 
     return details
