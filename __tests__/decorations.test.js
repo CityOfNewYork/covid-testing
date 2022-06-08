@@ -22,7 +22,8 @@ beforeEach(() => {
     friday: 'now - later',
     saturday: 'now - later',
     sunday: 'now - later',
-    open_date: 'start date'
+    open_date: 'start date',
+    minimum_age: 2
   })
   decorations.notOpenYet.length = 0
   decorations.decorations.cssClass = jest.fn()
@@ -128,9 +129,10 @@ test('details', () => {
   const div = $('<div></div>') 
 
   div.html(feature.detailsHtml())
-  expect(div.html()).toBe('<div class="detail"><div><strong>Appointment Required: </strong>No</div><div><strong>Physician order required: </strong>No</div><div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs notranslate">now - later</td></tr></tbody></table></div></div>')
+  expect(div.html()).toBe('<div class="detail"><div><strong>Appointment Required: </strong>No</div><div><strong>Physician order required: </strong>No</div><div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody><tr><td class="day">Monday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Tuesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Wednesday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Thursday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Friday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Saturday</td><td class="hrs notranslate">now - later</td></tr><tr><td class="day">Sunday</td><td class="hrs notranslate">now - later</td></tr></tbody></table></div><i>Tests can be used on people 2 years and older.</i></div>')
 
   feature.set('appointment_required', 'Y')
+  feature.set('minimum_age', null)
 
 
   div.html( feature.detailsHtml())

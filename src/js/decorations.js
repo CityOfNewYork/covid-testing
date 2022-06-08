@@ -82,13 +82,15 @@ const decorations = {
   detailsHtml() {
     const apptOnly = this.get('appointment_required') === 'Y' ? 'Yes' : 'No'
     const referralReq = this.get('physician_order_required') === 'Y' ? 'Yes' : 'No'
-
+    const minimumAge = this.get('minimum_age')
     const hours = this.hoursHtml()
 
     const details = $('<div class="detail"></div>')
       .append(`<div><strong>Appointment Required: </strong>${apptOnly}</div>`)
       .append(`<div><strong>Physician order required: </strong>${referralReq}</div>`)
     details.append(hours)
+    if (minimumAge && !isNaN(minimumAge))
+      details.append(`<i>Tests can be used on people ${minimumAge} years and older.</i>`)
 
     return details
   }
