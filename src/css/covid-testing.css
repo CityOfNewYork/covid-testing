@@ -19,6 +19,9 @@
 .btn:hover {
   color: var(--color-light);
 }
+.btn:hover * {
+  color: var(--color-light);
+}
 .btn.map:hover {
   background-image: var(--map-icon-light);
 }
@@ -48,9 +51,14 @@
 .fnd .splash .dia a.btn-yes:hover {
   background-image: var(--speaker-icon-light);
 }
-.fnd .splash .dia a.btn-yes,
-.fnd .splash .dia a.btn-no {
-  width: calc(100% - 6px);
+.fnd .splash a.btn.rad-all.btn-yes {
+  width: calc(100% - 75px);
+}
+.fnd .splash a.btn.rad-all.btn-no {
+  width: calc(100% - 40px);
+}
+#lng .btn.rad-all {
+  width: calc(100% - 110px);
 }
 .splash p {
   margin: 5px 0;
@@ -99,6 +107,9 @@
 }
 .pop .dtl .hrs {
   width: 55%;
+}
+.fnd .splash .dia {
+  height: 250px;
 }
 @media only screen and (max-width: 750px), screen and (max-device-height: 350px) {
   .fnd .lst-srch .srch {
