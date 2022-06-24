@@ -7,24 +7,18 @@ const today_mm = (NOW_TODAY.getMonth() + 1).toString().padStart(2, '0')
 const today_dd = NOW_TODAY.getDate().toString().padStart(2, '0')
 
 const TODAY = `${today_yyyy}-${today_mm}-${today_dd}`
-const notOpenYet = []
+const notOpen = []
 
 const HOURS_HTML = '<div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody></tbody></table></div>'
 
-
-//flag,unique_id,id,site_name,state,county,
-// address,city,zip_code,phone_number,testing_status,appointment_required,
-// physician_order_required,screening_required,restrictions_apply,restriction_details,
-// type_of_center,rapid_testing,non_rapid_testing,guidelines,provider_url,antibody_testing,
-// monday,tuesday,wednesday,thursday,friday,saturday,sunday,latitude,longitude,cost_of_test,open_date,
-// close_date,minimum_age
-
-
 const decorations = {
   extendFeature() {
-    const start = this.get('open_date')
-    if (start > TODAY) {
-      notOpenYet.push(this)
+    const start = new Date(this.get('StartDate') * 1).toISOString().split('T')[0]
+    const end = new Date(this.get('EndDate') * 1).toISOString().split('T')[0]
+    const noFilter = location.href.split('?').indexOf('nofilter=true') > -1
+    if (!noFilter && (start > TODAY || end < TODAY)) {
+      console.info(2)
+      notOpen.push(this)
     } else {
       this.set(
         'search_label',
@@ -34,60 +28,61 @@ const decorations = {
       this.set('search_name', this.getName())
     }
   },
-  getCity() {
-    return this.get('city')
-  },
-  getState() {
-    return this.get('state')
+  getBorough() {
+    return this.get('Borough')
   },
   getZip() {
-    return this.get('zip_code')
+    return this.get('Zipcode')
   },
   getFullAddress() {
     return `${this.getAddress1()}, ${this.getCityStateZip()}`
   },
   getName() {
-    return this.get('site_name')
+    return this.get('FacilityName')
   },
   getAddress1() {
-    return this.get('address')
+    return this.get('Address')
   },
   getCityStateZip() {
-    return `${this.getCity()}, ${this.getState()} ${this.getZip()}`
+    return `${this.getBorough()}, NY ${this.getZip()}`
   },
   getPhone() {
-    return this.get('phone_number')
+    return this.get('Phone')
   },
   getTip() {
     return this.get('search_label')
   },
   getWebsite() {
-    return this.get('provider_url')
+    return this.get('Website')
   },
   hours(day) {
-    return this.get(day) || 'Closed'
+    const hrs = this.get(`Hours${day}`)
+    if (hrs) {
+      return hrs.replace(/-/, ' - ').replace(/am/g, ' AM').replace(/pm/g, ' PM')
+    }
+    return 'Closed'
   },
   hoursHtml() {
     const opHours = $(HOURS_HTML)
     opHours.find('tbody')
-      .append(`<tr><td class="day">Monday</td><td class="hrs notranslate">${this.hours('monday')}`)
-      .append(`<tr><td class="day">Tuesday</td><td class="hrs notranslate">${this.hours('tuesday')}`)
-      .append(`<tr><td class="day">Wednesday</td><td class="hrs notranslate">${this.hours('wednesday')}`)
-      .append(`<tr><td class="day">Thursday</td><td class="hrs notranslate">${this.hours('thursday')}`)
-      .append(`<tr><td class="day">Friday</td><td class="hrs notranslate">${this.hours('friday')}`)
-      .append(`<tr><td class="day">Saturday</td><td class="hrs notranslate">${this.hours('saturday')}`)
-      .append(`<tr><td class="day">Sunday</td><td class="hrs notranslate">${this.hours('sunday')}`)
+      .append(`<tr><td class="day">Monday</td><td class="hrs notranslate">${this.hours('Monday')}`)
+      .append(`<tr><td class="day">Tuesday</td><td class="hrs notranslate">${this.hours('Tuesday')}`)
+      .append(`<tr><td class="day">Wednesday</td><td class="hrs notranslate">${this.hours('Wednesday')}`)
+      .append(`<tr><td class="day">Thursday</td><td class="hrs notranslate">${this.hours('Thursday')}`)
+      .append(`<tr><td class="day">Friday</td><td class="hrs notranslate">${this.hours('Friday')}`)
+      .append(`<tr><td class="day">Saturday</td><td class="hrs notranslate">${this.hours('Saturday')}`)
+      .append(`<tr><td class="day">Sunday</td><td class="hrs notranslate">${this.hours('Sunday')}`)
     return opHours
   },
   detailsHtml() {
-    const apptOnly = this.get('appointment_required') === 'Y' ? 'Yes' : 'No'
-    const referralReq = this.get('physician_order_required') === 'Y' ? 'Yes' : 'No'
-    const minimumAge = this.get('minimum_age')
+    const walkin = this.get('WalkInsWelcome') === 'Y' ? 'Yes' : 'No'
+    const apptAvailable = this.get('AppointmentsAvailable') === 'Y' ? 'Yes' : 'No'
+    const minimumAge = this.get('MinimumAge')
     const hours = this.hoursHtml()
 
     const details = $('<div class="detail"></div>')
-      .append(`<div><strong>Appointment Required: </strong>${apptOnly}</div>`)
-      .append(`<div><strong>Physician order required: </strong>${referralReq}</div>`)
+      .append(`<div><strong>Walk-ins Welcome: </strong>${walkin}</div>`)
+      .append(`<div><strong>Appointment Available: </strong>${apptAvailable}</div>`)
     details.append(hours)
     if (minimumAge && !isNaN(minimumAge))
       details.append(`<i>Tests can be used on people ${minimumAge} years and older.</i>`)
@@ -96,4 +91,4 @@ const decorations = {
   }
 }
 
-export default {notOpenYet, decorations}
+export default {notOpen, decorations}

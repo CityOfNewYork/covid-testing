@@ -1,7 +1,7 @@
 import urls from './urls'
 import style from './style'
 import decorations from './decorations'
-import CsvPoint from 'nyc-lib/nyc/ol/format/CsvPoint'
+import GeoJSON from 'ol/format/GeoJSON'
 import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
 import Point from 'ol/geom/Point'
 import {extend, getWidth} from 'ol/extent'
@@ -45,14 +45,10 @@ class App extends FinderApp {
       facilityTabTitle: 'Testing Sites',
       splashOptions: App.getSplashOptions(document.location.search),
       geoclientUrl: urls.GEOCLIENT_URL,
-      facilityUrl: urls.FACILITY_CSV_URL,
+      facilityUrl: urls.FACILITY_URL,
       facilityStyle: style,
       facilitySearch: { displayField: 'search_label', nameField: 'search_name', placeholder: 'Search for a location near you...' },
-      facilityFormat: new CsvPoint({
-        x: 'longitude',
-        y: 'latitude',
-        dataProjection: 'EPSG:4326'
-      }),
+      facilityFormat: new GeoJSON(),
       filterChoiceOptions: filters,
       decorations: [decorations.decorations],
       directionsUrl: urls.DIRECTIONS_URL
@@ -74,7 +70,7 @@ class App extends FinderApp {
     }
   }
   ready(features) {
-    decorations.notOpenYet.forEach(feature => {
+    decorations.notOpen.forEach(feature => {
       this.source.removeFeature(feature)
     })
     super.ready(this.source.getFeatures())
