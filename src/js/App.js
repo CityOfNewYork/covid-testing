@@ -23,20 +23,20 @@ FinderApp.prototype.directionsTo = MapMgr.prototype.directionsTo
 
 const filters = [
   {
-    title: 'Location type',
+    title: 'ADA Compliant',
     choices: [
-      {name: 'type_of_center', values: ['Walk up only'], label: 'Walk up only', checked: true},
-      {name: 'type_of_center', values: ['Urgent Care Clinic'], label: 'Urgent Care Clinic', checked: true},
-      {name: 'type_of_center', values: ['Pharmacy Clinic'], label: 'Pharmacy Clinic', checked: true},
-      {name: 'type_of_center', values: ['Hospital'], label: 'Hospital', checked: true},
-      {name: 'type_of_center', values: [''], label: 'Other', checked: true}
+      {name: 'ADACompliant', values: ['Y'], label: 'Yes', checked: true},
+      {name: 'ADACompliant', values: ['', 'N'], label: 'No', checked: true}
     ]
   },
   {
-    title: 'Appointment Required',
+    title: 'Location type',
     choices: [
-      {name: 'appointment_required', values: ['Y'], label: 'Yes', checked: true},
-      {name: 'appointment_required', values: ['', 'N'], label: 'No', checked: true}
+      {name: 'FacilityType', values: ['Mobile Test Site'], label: 'Mobile Test Site', checked: true},
+      {name: 'FacilityType', values: ['Clinic'], label: 'Clinic', checked: true},
+      {name: 'FacilityType', values: ['Rapid Test Pickup Site'], label: 'Rapid Test Pickup Site', checked: true},
+      {name: 'FacilityType', values: ['Hospital'], label: 'Hospital', checked: true},
+      {name: 'FacilityType', values: [''], label: 'Other', checked: true}
     ]
   }
 ]

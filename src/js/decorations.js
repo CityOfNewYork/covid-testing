@@ -78,14 +78,19 @@ const decorations = {
     const walkin = this.get('WalkInsWelcome') === 'Y' ? 'Yes' : 'No'
     const apptAvailable = this.get('AppointmentsAvailable') === 'Y' ? 'Yes' : 'No'
     const minimumAge = this.get('MinimumAge')
+    const addedInfo = this.get('AdditionalInfo')
+    const ada = this.get('ADACompliant') === 'Y' ? 'Yes' : 'No'
     const hours = this.hoursHtml()
 
     const details = $('<div class="detail"></div>')
+      .append(`<div><strong>ADA Compliant: </strong>${ada}</div>`)
       .append(`<div><strong>Walk-ins Welcome: </strong>${walkin}</div>`)
       .append(`<div><strong>Appointment Available: </strong>${apptAvailable}</div>`)
-    details.append(hours)
-    if (minimumAge && !isNaN(minimumAge))
+      .append(hours)
+    if (minimumAge > 0)
       details.append(`<i>Tests can be used on people ${minimumAge} years and older.</i>`)
+    if (addedInfo)
+      details.append(`<div>${addedInfo}</div>`)
 
     return details
   }
