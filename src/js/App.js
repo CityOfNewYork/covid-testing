@@ -5,6 +5,7 @@ import GeoJSON from 'ol/format/GeoJSON'
 import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
 import Point from 'ol/geom/Point'
 import {extend, getWidth} from 'ol/extent'
+import MapMgr from 'nyc-lib/nyc/ol/MapMgr'
 
 const screenReaderNote = `<h1 style="color:red">Important</h1>
 <p style="color:red">
@@ -17,6 +18,8 @@ const screenReaderNote = `<h1 style="color:red">Important</h1>
 </p>`
 
 FinderApp.SCREEN_READER_INFO = screenReaderNote + FinderApp.SCREEN_READER_INFO
+
+FinderApp.prototype.directionsTo = MapMgr.prototype.directionsTo
 
 const filters = [
   {
