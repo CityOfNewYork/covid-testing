@@ -53,8 +53,7 @@ class App extends FinderApp {
       facilitySearch: { displayField: 'search_label', nameField: 'search_name', placeholder: 'Search for a location near you...' },
       facilityFormat: new GeoJSON(),
       filterChoiceOptions: filters,
-      decorations: [decorations.decorations],
-      directionsUrl: urls.DIRECTIONS_URL
+      decorations: [decorations.decorations]
     })
   }
   located (location) {

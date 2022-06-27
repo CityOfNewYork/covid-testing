@@ -25,7 +25,7 @@ beforeEach(() => {
     open_date: 'start date',
     minimum_age: 2
   })
-  decorations.notOpenYet.length = 0
+  decorations.notOpen.length = 0
   decorations.decorations.cssClass = jest.fn()
   decorations.decorations.distanceHtml = jest.fn()
   decorations.decorations.nameHtml = jest.fn()
@@ -44,7 +44,7 @@ describe('extendFeature', () => {
 
     feature.set('open_date', '2020-05-01')
     feature.extendFeature()
-    expect(decorations.notOpenYet.length).toBe(0)
+    expect(decorations.notOpen.length).toBe(0)
     expect(feature.get('search_name')).toBe(feature.getName())
     expect(feature.get('search_label')).toBe(
       '<b><span class="srch-lbl-lg">' +  feature.getName() + 
@@ -56,8 +56,8 @@ describe('extendFeature', () => {
 
     feature.set('open_date', '5000-01-01')
     feature.extendFeature()
-    expect(decorations.notOpenYet.length).toBe(1)
-    expect(decorations.notOpenYet[0]).toBe(feature)
+    expect(decorations.notOpen.length).toBe(1)
+    expect(decorations.notOpen[0]).toBe(feature)
     expect(feature.get('search_label')).toBeUndefined()
   })
 })

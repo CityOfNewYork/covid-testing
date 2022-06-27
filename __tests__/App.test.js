@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import App from '../src/js/App'
 import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
-import CsvPoint from 'nyc-lib/nyc/ol/format/CsvPoint'
+import GeoJSON from 'ol/format/GeoJSON'
 import urls from '../src/js/urls'
 import style from '../src/js/style'
 import decorations from '../src/js/decorations'
@@ -20,65 +20,56 @@ const optionsWsplash = {
   facilityTabTitle: 'Testing Sites',
   splashOptions: {message},
   geoclientUrl: urls.GEOCLIENT_URL,
-  facilityUrl: urls.FACILITY_CSV_URL,
+  facilityUrl: urls.FACILITY_URL,
   facilityStyle: style,
   facilitySearch: { displayField: 'search_label', nameField: 'search_name', placeholder: 'Search for a location near you...' },
-  facilityFormat: new CsvPoint({
-    x: 'longitude',
-    y: 'latitude',
-    dataProjection: 'EPSG:4326'
-  }),
+  facilityFormat: new GeoJSON(),
   filterChoiceOptions: [
     {
-      title: 'Location type',
+      title: 'ADA Compliant',
       choices: [
-        {name: 'type_of_center', values: ['Walk up only'], label: 'Walk up only', checked: true},
-        {name: 'type_of_center', values: ['Urgent Care Clinic'], label: 'Urgent Care Clinic', checked: true},
-        {name: 'type_of_center', values: ['Pharmacy Clinic'], label: 'Pharmacy Clinic', checked: true},
-        {name: 'type_of_center', values: ['Hospital'], label: 'Hospital', checked: true},
-        {name: 'type_of_center', values: [''], label: 'Other', checked: true}
+        {name: 'ADACompliant', values: ['Y'], label: 'Yes', checked: true},
+        {name: 'ADACompliant', values: ['', 'N'], label: 'No', checked: true}
       ]
     },
     {
-      title: 'Appointment Required',
+      title: 'Location type',
       choices: [
-        {name: 'appointment_required', values: ['Y'], label: 'Yes', checked: true},
-        {name: 'appointment_required', values: ['', 'N'], label: 'No', checked: true}
+        {name: 'FacilityType', values: ['Mobile Test Site'], label: 'Mobile Test Site', checked: true},
+        {name: 'FacilityType', values: ['Clinic'], label: 'Clinic', checked: true},
+        {name: 'FacilityType', values: ['Rapid Test Pickup Site'], label: 'Rapid Test Pickup Site', checked: true},
+        {name: 'FacilityType', values: ['Hospital'], label: 'Hospital', checked: true},
+        {name: 'FacilityType', values: [''], label: 'Other', checked: true}
       ]
     }
   ],
-  decorations: [decorations.decorations],
-  directionsUrl: urls.DIRECTIONS_URL
+  decorations: [decorations.decorations]
 }
 
 const optionsWOsplash = {
   title: 'COVID-19 Diagnostic Testing Sites',
   facilityTabTitle: 'Testing Sites',
   geoclientUrl: urls.GEOCLIENT_URL,
-  facilityUrl: urls.FACILITY_CSV_URL,
+  facilityUrl: urls.FACILITY_URL,
   facilityStyle: style,
   facilitySearch: { displayField: 'search_label', nameField: 'search_name', placeholder: 'Search for a location near you...' },
-  facilityFormat: new CsvPoint({
-    x: 'longitude',
-    y: 'latitude',
-    dataProjection: 'EPSG:4326'
-  }),
+  facilityFormat: new GeoJSON(),
   filterChoiceOptions: [
     {
-      title: 'Location type',
+      title: 'ADA Compliant',
       choices: [
-        {name: 'type_of_center', values: ['Walk up only'], label: 'Walk up only', checked: true},
-        {name: 'type_of_center', values: ['Urgent Care Clinic'], label: 'Urgent Care Clinic', checked: true},
-        {name: 'type_of_center', values: ['Pharmacy Clinic'], label: 'Pharmacy Clinic', checked: true},
-        {name: 'type_of_center', values: ['Hospital'], label: 'Hospital', checked: true},
-        {name: 'type_of_center', values: [''], label: 'Other', checked: true}
+        {name: 'ADACompliant', values: ['Y'], label: 'Yes', checked: true},
+        {name: 'ADACompliant', values: ['', 'N'], label: 'No', checked: true}
       ]
     },
     {
-      title: 'Appointment Required',
+      title: 'Location type',
       choices: [
-        {name: 'appointment_required', values: ['Y'], label: 'Yes', checked: true},
-        {name: 'appointment_required', values: ['', 'N'], label: 'No', checked: true}
+        {name: 'FacilityType', values: ['Mobile Test Site'], label: 'Mobile Test Site', checked: true},
+        {name: 'FacilityType', values: ['Clinic'], label: 'Clinic', checked: true},
+        {name: 'FacilityType', values: ['Rapid Test Pickup Site'], label: 'Rapid Test Pickup Site', checked: true},
+        {name: 'FacilityType', values: ['Hospital'], label: 'Hospital', checked: true},
+        {name: 'FacilityType', values: [''], label: 'Other', checked: true}
       ]
     }
   ],
@@ -216,10 +207,10 @@ describe('zoomToExtent', () => {
 
 describe('ready', () => {
   beforeEach(() => {
-    decorations.notOpenYet.push('mock-feature')
+    decorations.notOpen.push('mock-feature')
   })
   afterEach(() => {
-    decorations.notOpenYet.length = 0
+    decorations.notOpen.length = 0
   })
 
   test('ready', () => {
