@@ -17,7 +17,6 @@ const decorations = {
     const end = new Date(this.get('EndDate') * 1).toISOString().split('T')[0]
     const noFilter = location.href.split('?').indexOf('nofilter=true') > -1
     if (!noFilter && (start > TODAY || end < TODAY)) {
-      console.info(2)
       notOpen.push(this)
     } else {
       this.set(
