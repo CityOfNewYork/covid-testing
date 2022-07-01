@@ -62,7 +62,7 @@ class App extends FinderApp {
       facilitySearch: { displayField: 'search_label', nameField: 'search_name', placeholder: 'Search for a location near you...' },
       facilityFormat: new GeoJSON(),
       filterChoiceOptions: filters,
-      decorations: [decorations.decorations]
+      decorations
     })
   }
   located (location) {
@@ -79,12 +79,6 @@ class App extends FinderApp {
     } else {
       this.view.fit(extent, {size: this.map.getSize(), duration: 500})
     }
-  }
-  ready(features) {
-    decorations.notOpen.forEach(feature => {
-      this.source.removeFeature(feature)
-    })
-    super.ready(this.source.getFeatures())
   }
 }
 

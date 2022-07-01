@@ -1,30 +1,14 @@
 import $ from 'jquery'
 
-const NOW_TODAY = new Date()
-
-const today_yyyy = NOW_TODAY.getFullYear().toString()
-const today_mm = (NOW_TODAY.getMonth() + 1).toString().padStart(2, '0')
-const today_dd = NOW_TODAY.getDate().toString().padStart(2, '0')
-
-const TODAY = `${today_yyyy}-${today_mm}-${today_dd}`
-const notOpen = []
-
 const HOURS_HTML = '<div class="op-hours"><table><thead><tr><th>Day</th><th>Hours of Operation</th></tr></thead><tbody></tbody></table></div>'
 
 const decorations = {
   extendFeature() {
-    const start = new Date(this.get('StartDate') * 1).toISOString().split('T')[0]
-    const end = new Date(this.get('EndDate') * 1).toISOString().split('T')[0]
-    const noFilter = location.href.split('?').indexOf('nofilter=true') > -1
-    if (!noFilter && (start > TODAY || end < TODAY)) {
-      notOpen.push(this)
-    } else {
-      this.set(
-        'search_label',
-        `<b><span class="srch-lbl-lg ${this.cssClass()}">${this.getName()}</span></b><br><span class="srch-lbl-sm">${this.getFullAddress()}</span>`
-      )
-      this.set('search_name', this.getName())
-    }
+    this.set(
+      'search_label',
+      `<b><span class="srch-lbl-lg ${this.cssClass()}">${this.getName()}</span></b><br><span class="srch-lbl-sm">${this.getFullAddress()}</span>`
+    )
+    this.set('search_name', this.getName())
   },
   cssClass() {
     return this.get('ADACompliant') === 'Y' ? 'acc' : ''
@@ -97,4 +81,4 @@ const decorations = {
   }
 }
 
-export default {notOpen, decorations}
+export default [decorations]
