@@ -39,11 +39,20 @@ const optionsWsplash = {
         {name: 'FacilityType', values: ['Clinic'], label: 'Clinic', checked: true},
         {name: 'FacilityType', values: ['Rapid Test Pickup Site'], label: 'Rapid Test Pickup Site', checked: true},
         {name: 'FacilityType', values: ['Hospital'], label: 'Hospital', checked: true},
-        {name: 'FacilityType', values: [''], label: 'Other', checked: true}
+        {name: 'FacilityType', values: ['Test-to-Treat'], label: 'Test-to-Treat', checked: true}
+      ]
+    },
+    {
+      title: 'Minimum Age',
+      radio: true,
+      choices: [
+        {name: 'MinimumAge', values: ['0', '2', '4'], label: 'No minimum', checked: true},
+        {name: 'MinimumAge', values: ['2', '4'], label: '2 years and older'},
+        {name: 'MinimumAge', values: ['4'], label: '4 years and older'}
       ]
     }
   ],
-  decorations: [decorations.decorations]
+  decorations
 }
 
 const optionsWOsplash = {
@@ -69,12 +78,20 @@ const optionsWOsplash = {
         {name: 'FacilityType', values: ['Clinic'], label: 'Clinic', checked: true},
         {name: 'FacilityType', values: ['Rapid Test Pickup Site'], label: 'Rapid Test Pickup Site', checked: true},
         {name: 'FacilityType', values: ['Hospital'], label: 'Hospital', checked: true},
-        {name: 'FacilityType', values: [''], label: 'Other', checked: true}
+        {name: 'FacilityType', values: ['Test-to-Treat'], label: 'Test-to-Treat', checked: true}
+      ]
+    },
+    {
+      title: 'Minimum Age',
+      radio: true,
+      choices: [
+        {name: 'MinimumAge', values: ['0', '2', '4'], label: 'No minimum', checked: true},
+        {name: 'MinimumAge', values: ['2', '4'], label: '2 years and older'},
+        {name: 'MinimumAge', values: ['4'], label: '4 years and older'}
       ]
     }
   ],
-  decorations: [decorations.decorations],
-  directionsUrl: urls.DIRECTIONS_URL
+  decorations
 }
 
 beforeEach(() => {
@@ -205,32 +222,3 @@ describe('zoomToExtent', () => {
   })
 })
 
-describe('ready', () => {
-  beforeEach(() => {
-    decorations.notOpen.push('mock-feature')
-  })
-  afterEach(() => {
-    decorations.notOpen.length = 0
-  })
-
-  test('ready', () => {
-    expect.assertions(5)
-
-    const app = new App()
-    app.source = {
-      removeFeature: jest.fn(),
-      getFeatures: jest.fn().mockImplementation(() => {
-        return 'mock-features'
-      })
-    }
-
-    app.ready()
-
-    expect(app.source.removeFeature).toHaveBeenCalledTimes(1)
-    expect(app.source.removeFeature.mock.calls[0][0]).toBe('mock-feature')
-    expect(app.source.getFeatures).toHaveBeenCalledTimes(1)
-    expect(FinderApp.prototype.ready).toHaveBeenCalledTimes(1)
-    expect(FinderApp.prototype.ready.mock.calls[0][0]).toBe('mock-features')
-
-  })
-})

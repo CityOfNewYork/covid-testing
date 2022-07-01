@@ -28,45 +28,23 @@ beforeEach(() => {
     EndDate: new Date('3000-01-01').getTime(),
     MinimumAge: 2
   })
-  decorations.notOpen.length = 0
-  decorations.decorations.distanceHtml = jest.fn()
-  decorations.decorations.nameHtml = jest.fn()
-  decorations.decorations.addressHtml = jest.fn()
-  decorations.decorations.mapButton = jest.fn()
-  decorations.decorations.directionsButton = jest.fn()
-  decorations.decorations.handleOver = jest.fn()
-  decorations.decorations.handleOut = jest.fn()
-  decorations.decorations.handleOver = jest.fn()
-  Object.assign(feature, decorations.decorations)
+  decorations[0].distanceHtml = jest.fn()
+  decorations[0].nameHtml = jest.fn()
+  decorations[0].addressHtml = jest.fn()
+  decorations[0].mapButton = jest.fn()
+  decorations[0].directionsButton = jest.fn()
+  decorations[0].handleOver = jest.fn()
+  decorations[0].handleOut = jest.fn()
+  decorations[0].handleOver = jest.fn()
+  Object.assign(feature, decorations[0])
 })
 
-describe('extendFeature', () => {
-  test('extendFeature open', () => {
-    expect.assertions(3)
+test('extendFeature', () => {
+  expect.assertions(2)
 
-    feature.extendFeature()
-    expect(decorations.notOpen.length).toBe(0)
-    expect(feature.get('search_name')).toBe(feature.getName())
-    expect(feature.get('search_label')).toBe(`<b><span class="srch-lbl-lg ">${feature.getName()}</span></b><br><span class="srch-lbl-sm">${feature.getFullAddress()}</span>`)
-  })
-  test('extendFeature not open yet', () => {
-    expect.assertions(3)
-
-    feature.set('StartDate', new Date('3000-01-01').getTime())
-    feature.extendFeature()
-    expect(decorations.notOpen.length).toBe(1)
-    expect(decorations.notOpen[0]).toBe(feature)
-    expect(feature.get('search_label')).toBeUndefined()
-  })
-  test('extendFeature already closed', () => {
-    expect.assertions(3)
-
-    feature.set('EndDate', new Date('2000-01-01').getTime())
-    feature.extendFeature()
-    expect(decorations.notOpen.length).toBe(1)
-    expect(decorations.notOpen[0]).toBe(feature)
-    expect(feature.get('search_label')).toBeUndefined()
-  })
+  feature.extendFeature()
+  expect(feature.get('search_name')).toBe(feature.getName())
+  expect(feature.get('search_label')).toBe(`<b><span class="srch-lbl-lg ">${feature.getName()}</span></b><br><span class="srch-lbl-sm">${feature.getFullAddress()}</span>`)
 })
 
 test('getFullAddress', () => {
