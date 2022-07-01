@@ -62,22 +62,24 @@ const decorations = {
   detailsHtml() {
     const walkin = this.get('WalkInsWelcome') === 'Y' ? 'Yes' : 'No'
     const apptAvailable = this.get('AppointmentsAvailable') === 'Y' ? 'Yes' : 'No'
-    const minimumAge = this.get('MinimumAge')
+    const minimumAge = this.get('MinimumAge') * 1
     const addedInfo = this.get('AdditionalInfo')
     const ada = this.get('ADACompliant') === 'Y' ? 'Yes' : 'No'
     const hours = this.hoursHtml()
 
     const details = $('<div class="detail"></div>')
-      .append(`<div><strong>ADA Compliant: </strong>${ada}</div>`)
-      .append(`<div><strong>Walk-ins Welcome: </strong>${walkin}</div>`)
-      .append(`<div><strong>Appointment Available: </strong>${apptAvailable}</div>`)
+      .append(`<div class="ada"><strong>ADA Compliant: </strong>${ada}</div>`)
+      .append(`<div class="walk"><strong>Walk-ins Welcome: </strong>${walkin}</div>`)
+      .append(`<div class="apt"><strong>Appointment Available: </strong>${apptAvailable}</div>`)
       .append(hours)
-    if (minimumAge > 0)
-      details.append(`<i>Tests can be used on people ${minimumAge} years and older.</i>`)
+    
+    const ul = $('<ul><li><strong>NO COST, regardless of insurance or immigration status<strong></li></ul>')
+      .append(minimumAge === 0 ? '<li><em>Tests can be used on people of any age.</em></li>'
+        : `<li><em>Tests can be used on people ${minimumAge} years and older.</em></li>`)
     if (addedInfo)
-      details.append(`<div>${addedInfo}</div>`)
+      ul.append(`<li>${addedInfo}</li>`)
 
-    return details
+    return details.append(ul)
   }
 }
 

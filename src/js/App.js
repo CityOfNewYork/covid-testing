@@ -53,7 +53,7 @@ const filters = [
 class App extends FinderApp {
   constructor() {
     super({
-      title: 'COVID-19 Diagnostic Testing Sites',
+      title: 'COVID-19 Test Site Finder',
       facilityTabTitle: 'Testing Sites',
       splashOptions: App.getSplashOptions(document.location.search),
       geoclientUrl: urls.GEOCLIENT_URL,
@@ -83,9 +83,10 @@ class App extends FinderApp {
 }
 
 
-const message = `<h1>COVID-19 Diagnostic Testing</h1>
+const message = `<h1>COVID-19 Test Site Finder</h1>
   <p>
   New COVID testing sites are open in New York City.  Safe, simple, and easy.  Get tested at any of our convenient locations today.
+  <a href="https://www.nychealthandhospitals.org/covid-19-testing-sites/" noopener target="info">More information...</a>
   </p>`
 
 App.getSplashOptions = search => {

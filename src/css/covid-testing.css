@@ -130,6 +130,19 @@ label[for="chc-chc-0"]:before {
 .translated-rtl label[for="chc-chc-0"]:before {
   float: right;
 }
+.facility .detail {
+  margin: 5px;
+}
+.facility .detail .op-hours {
+  margin: 5px 0;
+}
+.facility .detail li {
+  margin: 5px 0 0 0;
+}
+.facility .detail ul {
+  padding: 0 0 0 20px;
+}
+
 @media only screen and (max-width: 750px), screen and (max-device-height: 350px) {
   .fnd .lst-srch .srch {
     display: block;
@@ -141,11 +154,4 @@ label[for="chc-chc-0"]:before {
     right: 0;
   }  
 }
-@media only screen and (max-width : 415px) {
-  .fnd #banner * {
-    font-size: 14px;
-    line-height: 16px;
-    margin-top: -3px;
-    width: 129px;
-  }
-}
+

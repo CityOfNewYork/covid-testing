@@ -10,13 +10,14 @@ import Point from 'ol/geom/Point'
 
 jest.mock('nyc-lib/nyc/ol/FinderApp')
 
-const message = `<h1>COVID-19 Diagnostic Testing</h1>
+const message = `<h1>COVID-19 Test Site Finder</h1>
   <p>
   New COVID testing sites are open in New York City.  Safe, simple, and easy.  Get tested at any of our convenient locations today.
+  <a href="https://www.nychealthandhospitals.org/covid-19-testing-sites/" noopener target="info">More information...</a>
   </p>`
 
 const optionsWsplash = {
-  title: 'COVID-19 Diagnostic Testing Sites',
+  title: 'COVID-19 Test Site Finder',
   facilityTabTitle: 'Testing Sites',
   splashOptions: {message},
   geoclientUrl: urls.GEOCLIENT_URL,
@@ -56,7 +57,7 @@ const optionsWsplash = {
 }
 
 const optionsWOsplash = {
-  title: 'COVID-19 Diagnostic Testing Sites',
+  title: 'COVID-19 Test Site Finder',
   facilityTabTitle: 'Testing Sites',
   geoclientUrl: urls.GEOCLIENT_URL,
   facilityUrl: urls.FACILITY_URL,
