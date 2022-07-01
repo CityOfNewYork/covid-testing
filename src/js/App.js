@@ -36,7 +36,16 @@ const filters = [
       {name: 'FacilityType', values: ['Clinic'], label: 'Clinic', checked: true},
       {name: 'FacilityType', values: ['Rapid Test Pickup Site'], label: 'Rapid Test Pickup Site', checked: true},
       {name: 'FacilityType', values: ['Hospital'], label: 'Hospital', checked: true},
-      {name: 'FacilityType', values: [''], label: 'Other', checked: true}
+      {name: 'FacilityType', values: ['Test-to-Treat'], label: 'Test-to-Treat', checked: true}
+    ]
+  },
+  {
+    title: 'Minimum Age',
+    radio: true,
+    choices: [
+      {name: 'MinimumAge', values: ['0', '2', '4'], label: 'No minimum', checked: true},
+      {name: 'MinimumAge', values: ['2', '4'], label: '2 years and older'},
+      {name: 'MinimumAge', values: ['4'], label: '4 years and older'}
     ]
   }
 ]
