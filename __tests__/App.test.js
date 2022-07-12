@@ -16,7 +16,7 @@ const message = `<h1>COVID-19 Test Site Finder</h1>
   <a href="https://www.nychealthandhospitals.org/covid-19-testing-sites/" noopener target="info">More information...</a>
   <div class="ew">
   <a class="btn rad-all" role="button" href="#">
-   Eeeewwwww! this looks legacy &#9785;
+  Eeeewwwww! This Looks Legacy &#9785;
   </a>
   </div>  
   </p>`
