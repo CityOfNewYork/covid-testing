@@ -80,6 +80,15 @@ class App extends FinderApp {
       this.view.fit(extent, {size: this.map.getSize(), duration: 500})
     }
   }
+  monorail() {
+    $('.fnd .dia-container.splash').hide()
+    $('body').addClass('monorail')
+    this.translate.showButton('#map')
+  }
+  ready(features) {
+    super.ready(features)
+    $('.ew a').on('click', this.monorail.bind(this))
+  }
 }
 
 
@@ -87,6 +96,11 @@ const message = `<h1>COVID-19 Test Site Finder</h1>
   <p>
   New COVID testing sites are open in New York City.  Safe, simple, and easy.  Get tested at any of our convenient locations today.
   <a href="https://www.nychealthandhospitals.org/covid-19-testing-sites/" noopener target="info">More information...</a>
+  <div class="ew">
+  <a class="btn rad-all" role="button" href="#">
+   Eeeewwwww! this looks legacy &#9785;
+  </a>
+  </div>  
   </p>`
 
 App.getSplashOptions = search => {
