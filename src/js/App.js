@@ -6,6 +6,7 @@ import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
 import Point from 'ol/geom/Point'
 import {extend, getWidth} from 'ol/extent'
 import MapMgr from 'nyc-lib/nyc/ol/MapMgr'
+import olms from 'ol-mapbox-style'
 
 const screenReaderNote = `<h1 style="color:red">Important</h1>
 <p style="color:red">
@@ -81,9 +82,13 @@ class App extends FinderApp {
     }
   }
   monorail() {
-    $('.fnd .dia-container.splash').hide()
-    $('body').addClass('monorail')
-    this.translate.showButton('#map')
+    olms('map', urls.MVT_URL).then(map => {
+      this.map.base.setVisible(false)
+      this.map.labels.base.setVisible(false)
+      $('.fnd .dia-container.splash').hide()
+      $('body').addClass('monorail')
+      this.translate.showButton('#map')
+    })
   }
   ready(features) {
     super.ready(features)
