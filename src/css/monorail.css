@@ -74,7 +74,8 @@
 }
 
 .fnd.monorail .btn.rad-all.phone,
-.fnd.monorail .btn.rad-all.web {
+.fnd.monorail .btn.rad-all.web,
+.fnd.monorail .dtl .btn {
   line-height: 28px;
   padding: 0 0.93rem;
 }
