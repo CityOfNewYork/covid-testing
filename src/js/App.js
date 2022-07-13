@@ -84,6 +84,7 @@ class App extends FinderApp {
     }
   }
   monorail() {
+    $('#monorail').hide().addClass('monorail').fadeIn()
     $('.fnd .dia-container.splash').fadeOut()
     this.map.base.setVisible(false)
     this.map.labels.base.setVisible(false)
@@ -92,8 +93,10 @@ class App extends FinderApp {
     this.highlightLayer.setZIndex(2000)
     this.translate.showButton('#map')
     $('body').addClass('monorail')
+    setTimeout(() => $('#monorail').fadeOut(), 2500)
   }
   ready(features) {
+    $('.ew .btn').focus()
     super.ready(features)
     $('.ew a').on('click', this.monorail.bind(this))
   }
