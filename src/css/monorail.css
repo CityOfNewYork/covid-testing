@@ -3,7 +3,8 @@
   background-image: url("https://media0.giphy.com/media/l2Je8YG8hW0q1fQo8/giphy.gif?cid=ecf05e47vq4gfvlogz3m9jkw47kqzlwli30qtf9179us112m&rid=giphy.gif&ct=g");
   background-color: #000;
   background-position: center;
-  background-size: 90%;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 #monorail.monorail {
