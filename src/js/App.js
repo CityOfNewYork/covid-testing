@@ -96,7 +96,7 @@ class App extends FinderApp {
     setTimeout(() => $('#monorail').fadeOut(), 2500)
   }
   ready(features) {
-    $('.ew .btn').focus()
+    $('.ew .btn').trigger('focus')
     super.ready(features)
     $('.ew a').on('click', this.monorail.bind(this))
   }
