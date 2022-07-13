@@ -6,7 +6,8 @@ import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
 import Point from 'ol/geom/Point'
 import {extend, getWidth} from 'ol/extent'
 import MapMgr from 'nyc-lib/nyc/ol/MapMgr'
-import olms from 'ol-mapbox-style'
+import MultiFeaturePopup from 'nyc-lib/nyc/ol/MultiFeaturePopup'
+import FeatureTip from 'nyc-lib/nyc/ol/FeatureTip'
 
 const screenReaderNote = `<h1 style="color:red">Important</h1>
 <p style="color:red">
@@ -52,7 +53,7 @@ const filters = [
 ]
 
 class App extends FinderApp {
-  constructor() {
+  constructor(mvt) {
     super({
       title: 'COVID-19 Test Site Finder',
       facilityTabTitle: 'Testing Sites',
@@ -65,6 +66,7 @@ class App extends FinderApp {
       filterChoiceOptions: filters,
       decorations
     })
+    this.mvt = mvt
   }
   located (location) {
     super.located(location)
@@ -82,13 +84,14 @@ class App extends FinderApp {
     }
   }
   monorail() {
-    olms('map', urls.MVT_URL).then(map => {
-      this.map.base.setVisible(false)
-      this.map.labels.base.setVisible(false)
-      $('.fnd .dia-container.splash').hide()
-      $('body').addClass('monorail')
-      this.translate.showButton('#map')
-    })
+    $('.fnd .dia-container.splash').fadeOut()
+    this.map.base.setVisible(false)
+    this.map.labels.base.setVisible(false)
+    this.mvt.getLayers().getArray().forEach(layer => this.map.addLayer(layer))
+    this.layer.setZIndex(1000)
+    this.highlightLayer.setZIndex(2000)
+    this.translate.showButton('#map')
+    $('body').addClass('monorail')
   }
   ready(features) {
     super.ready(features)
