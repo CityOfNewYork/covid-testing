@@ -8,5 +8,4 @@ olms(
   urls.MVT_URL,
 ).then(map => {
   new App(map)
-  console.warn(map)
 })
