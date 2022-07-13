@@ -111,7 +111,7 @@
 .fnd .splash .dia {
   height: 250px;
 }
-.facility.acc:before,
+.facility.acc .name:before,
 label[for="chc-chc-0"]:before {
   display: block;
   content: ' ';
@@ -126,7 +126,7 @@ label[for="chc-chc-0"]:before {
   float: left;
   margin: -3px 3px;
 }
-.translated-rtl .facility.acc:before,
+.translated-rtl .facility.acc .name:before,
 .translated-rtl label[for="chc-chc-0"]:before {
   float: right;
 }
