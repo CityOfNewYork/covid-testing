@@ -5227,10 +5227,10 @@ nyc-build-helper@^0.0.43:
     webpack "4.19.1"
     zip-a-folder "^1.1.0"
 
-nyc-lib@^1.4.63:
-  version "1.4.63"
-  resolved "https://registry.yarnpkg.com/nyc-lib/-/nyc-lib-1.4.63.tgz#bcd545ff3a03f2ed725401990bf2e2456b42935f"
-  integrity sha512-qXpttyBB3GhG9esHQHlatayrxFwr72h+LnIwdywaJA1ehzxujw1Da7FTlbb/S2QrZNCWveZG1sjXXvTD4+EXdw==
+nyc-lib@^1.4.64:
+  version "1.4.64"
+  resolved "https://registry.yarnpkg.com/nyc-lib/-/nyc-lib-1.4.64.tgz#7bcf06d7d9101b8a43176b998c50b3f3e1ebec76"
+  integrity sha512-EeYPgl8+Bhu8Qb3w4YRlie8S78GnoVKNwZ2rq1zVkKgN36skzezR0oD6e1TXL+GfodzcOaZClgtjwiCCRIKXzQ==
   dependencies:
     global "^4.4.0"
     isomorphic-fetch "^3.0.0"

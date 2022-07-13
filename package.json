@@ -1,6 +1,6 @@
 {
   "name": "covid-testing",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "COVID Testing Facilities - Find the closest location.",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   "dependencies": {
     "jquery": "^3.3.1",
     "nyc-build-helper": "^0.0.40",
-    "nyc-lib": "^1.4.63",
+    "nyc-lib": "^1.4.64",
     "ol": "^6.14.1",
     "ol-mapbox-style": "^8.1.2",
     "papaparse": "^5.3.0",
